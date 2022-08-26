@@ -1,21 +1,31 @@
 :root {
-    --nav-bar-width: 260px;
+    --nav-bar-width: 220px;
 
-    --study-hover-color: rgb(225, 225, 255);
-    --study-selected-color: rgb(235, 235, 255);
+    --study-hover-color: #4e8144;
+    --study-selected-color: #404443;
 
-    --series-hover-color: rgb(205, 205, 235);
-    --series-selected-color: rgb(215, 215, 235);
+    --series-hover-color:#4e8144;
+    --series-selected-color: #313635;
 
-    --instance-hover-color: rgb(185, 185, 215);
-    --instance-selected-color: rgb(195, 195, 215);
+    --instance-hover-color: #4e8144;
+    --instance-selected-color: #212625;
 
-    --details-top-margin: 30px;
+    --details-top-margin: 2px;
 
-    --nav-side-color: rgb(255, 255, 255);
-    --nav-side-bg-color: #2e353d;
-    --nav-side-selected-bg-color: #4f5b69;
-    --nav-side-hover-bg-color: #3e454d;
-    --nav-side-submenu-color: rgb(255, 255, 255);
+    --nav-side-color: #91a389;
+    --nav-side-bg-color: #2e3d33;
+    --nav-side-selected-bg-color: #323935;
+    --nav-side-hover-bg-color: #2f3b35;
+    --nav-side-submenu-color: #0eaf44;
+
+    --bs-body-bg: #333;
+    --bs-table-bg: transparent;
+    --bs-table-accent-bg: transparent;
+    --bs-table-striped-color: #7aa879;
+    --bs-table-active-color: #77d375;
+    --bs-table-hover-color: #bddbbc;
+    --bs-body-line-height: 1.2rem;
+
+    
 
 }
