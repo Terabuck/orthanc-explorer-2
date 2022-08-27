@@ -79,7 +79,7 @@ export default {
 <template>
     <div class="nav-side-menu">
         <div>
-            <img class="orthanc-logo" src="..//assets/images/orthanc.png" height="48" />
+            <img class="orthanc-logo" src="..//assets/images/orthanc.png" height="40" style="padding:.2rem" />
         </div>
         <div v-if="uiOptions.ShowOrthancName" class="orthanc-name">
             <p>{{ system.Name }}</p>

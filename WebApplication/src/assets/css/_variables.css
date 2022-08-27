@@ -12,20 +12,20 @@
 
     --details-top-margin: 2px;
 
-    --nav-side-color: #91a389;
+    --nav-side-color: #9fae98;
     --nav-side-bg-color: #2e3d33;
     --nav-side-selected-bg-color: #323935;
     --nav-side-hover-bg-color: #2f3b35;
-    --nav-side-submenu-color: #0eaf44;
+    --nav-side-submenu-color: #39a25c;
 
     --bs-body-bg: #333;
+    --bs-body-line-height: 1.0rem;
+    --bs-body-font-size: 0.9rem;
+
     --bs-table-bg: transparent;
     --bs-table-accent-bg: transparent;
     --bs-table-striped-color: #7aa879;
     --bs-table-active-color: #77d375;
-    --bs-table-hover-color: #bddbbc;
-    --bs-body-line-height: 1.2rem;
-
-    
+    --bs-table-hover-color: #bddbbc;   
 
 }

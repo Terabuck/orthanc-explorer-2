@@ -738,6 +738,46 @@ input.form-control.study-list-filter {
   margin-bottom: var(--filter-margin);
   padding-top: var(--filter-padding);
   padding-bottom: var(--filter-padding);
+  padding-left: 0px;
+  background: #4f5f54;
+}
+
+.btn {
+  color: var(--nav-side-color);
+}
+
+.btn-primary {
+  color: var(--nav-side-color);
+  background-color: var(--series-selected-color);
+  border-color: var(--nav-side-color);
+}
+
+.btn-primary:hover {
+  color: var(--nav-side-hover-bg-color);
+  background-color: var(--study-hover-color);
+  border-color: var(--series-hover-color);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  border-color: var(--nav-side-color);
+  padding: 0.25rem 0.5rem 0.1rem;
+}
+
+button,
+select {
+  text-transform: none;
+  color: var(--nav-side-color);
+}
+
+tbody,
+td,
+tfoot,
+th,
+thead,
+tr {
+  border-style: hidden;
+  color: var(--nav-side-color);
 }
 
 .filter-button {
@@ -759,7 +799,7 @@ input.form-control.study-list-filter {
 }
 
 input.form-control.study-list-filter:not(:placeholder-shown) {
-  background-color: white;
+  background-color: var(--nav-side-color);
 }
 
 input.form-control.study-list-filter::placeholder {
@@ -790,14 +830,16 @@ button.form-control.study-list-filter {
 }
 
 .study-table > :not(caption) > * > * {
-  padding: 0.2rem;
+  padding: 0.35rem;
   border-width: 1px 0px 1px 0px;
+  border-bottom-color: var(--study-selected-color);
+  border-top-color: var(--bs-table-bg);
 }
 
 .study-filter th {
   text-align: left;
   padding-left: 10px;
-  background-color: rgb(240, 240, 240);
+  background-color: #3e4a42;
   padding-top: 0px;
   padding-bottom: 0px;
 }
@@ -821,5 +863,13 @@ button.form-control.study-list-filter {
   /* background-color: #f7dddf !important; */
   border-color: red !important;
   box-shadow: 0 0 0 0.25rem rgba(255, 0, 0, 0.25) !important;
+}
+
+.dropdown-menu {
+  background-color: #4f5f54;;
+}
+
+.dropdown-item {
+  color: #b7c2a3;
 }
 </style>

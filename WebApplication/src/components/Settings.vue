@@ -130,9 +130,8 @@ export default {
 <style scoped>
 
 h5 {
-    margin-top: 50px;
-    margin-bottom: 15px;
-    margin-left: 50px;
+    margin-top: 10px;
+    margin-left: 5px;
 }
 
 .settings {
