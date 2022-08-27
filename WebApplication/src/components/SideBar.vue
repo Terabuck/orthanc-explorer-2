@@ -79,7 +79,7 @@ export default {
 <template>
     <div class="nav-side-menu">
         <div>
-            <img class="orthanc-logo" src="..//assets/images/orthanc.png" height="48" />
+            <img class="orthanc-logo" src="..//assets/images/orthanc.png" height="40" style="padding:.2rem" />
         </div>
         <div v-if="uiOptions.ShowOrthancName" class="orthanc-name">
             <p>{{ system.Name }}</p>
@@ -185,9 +185,9 @@ export default {
 }
 
 .nav-side-menu {
-    font-family: verdana;
-    font-size: 12px;
-    font-weight: 200;
+    /* font-family: verdana; */
+    font-size: 1.5rem;
+    font-weight: 500;
     background-color: var(--nav-side-bg-color);
     color: var(--nav-side-color);
 }
@@ -295,7 +295,7 @@ export default {
 .menu-list {
     margin-left: 10px;
     margin-right: 10px;
-    font-size: 14px;
+    font-size: 1rem;
 }
 
 .menu-icon {

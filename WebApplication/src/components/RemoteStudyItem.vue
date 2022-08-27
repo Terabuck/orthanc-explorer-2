@@ -144,6 +144,7 @@ export default {
 
 <style scoped>
 .study-row-collapsed {
+    background-color: var(--bs-gray-800);
 }
 
 .study-row-expanded {

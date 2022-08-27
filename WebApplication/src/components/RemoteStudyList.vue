@@ -584,88 +584,148 @@ export default {
 
 <style>
 :root {
-    --filter-margin: 5px;
-    --filter-padding: 2px;
+  --filter-margin: 5px;
+  --filter-padding: 2px;
 }
 
 input.form-control.study-list-filter {
-    color: black;
-    margin-top: var(--filter-margin);
-    margin-bottom: var(--filter-margin);
-    padding-top: var(--filter-padding);
-    padding-bottom: var(--filter-padding);
+  color: black;
+  margin-top: var(--filter-margin);
+  margin-bottom: var(--filter-margin);
+  padding-top: var(--filter-padding);
+  padding-bottom: var(--filter-padding);
+  padding-left: 0px;
+  background: #4f5f54;
+}
+
+.btn {
+  color: var(--nav-side-color);
+}
+
+.btn-primary {
+  color: var(--nav-side-color);
+  background-color: var(--series-selected-color);
+  border-color: var(--nav-side-color);
+}
+
+.btn-primary:hover {
+  color: var(--nav-side-hover-bg-color);
+  background-color: var(--study-hover-color);
+  border-color: var(--series-hover-color);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  border-color: var(--nav-side-color);
+  padding: 0.25rem 0.5rem 0.1rem;
+}
+
+button,
+select {
+  text-transform: none;
+  color: var(--nav-side-color);
+}
+
+tbody,
+td,
+tfoot,
+th,
+thead,
+tr {
+  border-style: hidden;
+  color: var(--nav-side-color);
 }
 
 .filter-button {
-    border: 1px solid #ced4da;
+  /* border: 1px solid #ced4da; */
 }
 
 .search-button {
-    padding-left: 0px !important;
+  padding-left: 0px !important;
 }
 
 .is-not-searching {
-    background-color: #0d6dfd86 !important;
-    border-color: #0d6dfd86 !important;
+  background-color: #399637 !important;
+  border-color: #399637 !important;
 }
 
 .is-searching {
-    background-color: #fda90d86 !important;
-    border-color: #fda90d86 !important;
+  background-color: #fda90d86 !important;
+  border-color: #fda90d86 !important;
 }
 
 input.form-control.study-list-filter:not(:placeholder-shown) {
-    background-color: white;
+  background-color: var(--nav-side-color);
 }
 
 input.form-control.study-list-filter::placeholder {
-    color: rgb(200, 200, 200);
+  color: rgb(200, 200, 200);
 }
 
 button.form-control.study-list-filter {
-    color: black;
-    margin-top: var(--filter-margin);
-    margin-bottom: var(--filter-margin);
-    padding-top: var(--filter-padding);
-    padding-bottom: var(--filter-padding);
+  color: #99d598;
+  margin-top: var(--filter-margin);
+  margin-bottom: var(--filter-margin);
+  padding-top: var(--filter-padding);
+  padding-bottom: var(--filter-padding);
 }
 
 .study-table-header {
-    text-align: left;
-    padding-left: 10px;
+  text-align: left;
+  padding-left: 10px;
+  color: #89bdac;
 }
 
-.study-table> :not(:first-child) {
-    border-top: 0px !important;
+.study-table > :not(:first-child) {
+  border-top: 0px !important;
+  color: #89bdac;
+}
+
+.study-table > :nth-child(odd) > * {
+  background-color: var(--bs-table-bg);
+}
+
+.study-table > :not(caption) > * > * {
+  padding: 0.35rem;
+  border-width: 1px 0px 1px 0px;
+  border-bottom-color: var(--study-selected-color);
+  border-top-color: var(--bs-table-bg);
 }
 
 .study-filter th {
-    text-align: left;
-    padding-left: 10px;
-    background-color: rgb(240, 240, 240);
-    padding-top: 0px;
-    padding-bottom: 0px;
+  text-align: left;
+  padding-left: 10px;
+  background-color: #3e4a42;
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
 
 .study-table td {
-    text-align: left;
-    padding-left: 10px;
+  text-align: left;
+  padding-left: 10px;
 }
 
 .bottom-fixed-alert {
-    position: fixed !important;
-    bottom: 0px;
-    width: 100%;
-    font-size: large;
-    font-weight: 600;
-    text-align: left;
-    padding-left: 50px !important;
+  position: fixed !important;
+  bottom: 0px;
+  width: 100%;
+  font-size: large;
+  font-weight: 600;
+  text-align: left;
+  padding-left: 50px !important;
 }
 
 .is-invalid-filter {
-    /* background-color: #f7dddf !important; */
-    border-color: red !important;
-    box-shadow: 0 0 0 .25rem rgba(255, 0, 0, .25) !important;
+  /* background-color: #f7dddf !important; */
+  border-color: red !important;
+  box-shadow: 0 0 0 0.25rem rgba(255, 0, 0, 0.25) !important;
 }
 
+.dropdown-menu {
+  background-color: #4f5f54;
+}
+
+.dropdown-item {
+  color: #b7c2a3;
+}
 </style>

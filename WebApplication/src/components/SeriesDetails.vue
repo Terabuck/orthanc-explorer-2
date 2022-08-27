@@ -45,7 +45,7 @@ export default {
                     <ResourceDetailText :value="seriesMainDicomTags.SeriesNumber">Series Number</ResourceDetailText>
                     <ResourceDetailText :value="seriesMainDicomTags.BodyPartExamined">Body Part Examined</ResourceDetailText>
                     <ResourceDetailText :value="seriesMainDicomTags.ProtocolName">Protocol Name</ResourceDetailText>
-                    <ResourceDetailText :value="seriesMainDicomTags.SeriesInstanceUID" :truncate="true">Series Instance UID</ResourceDetailText>
+                    <!-- <ResourceDetailText :value="seriesMainDicomTags.SeriesInstanceUID" :truncate="true">Series Instance UID</ResourceDetailText> -->
                     <ResourceDetailText :value="seriesMainDicomTags.SeriesDate">Series Date</ResourceDetailText>
                 </ul>
             </td>

@@ -78,12 +78,24 @@ export default {
 <style>
 .instance-table > :not(:first-child) {
     border-top: 0px !important;
+    color: #acdbcc;
 }
 
-.instance-table>:first-child {
+.instance-table > :first-child {
     border-bottom: 2px !important;
     border-style: solid !important;
     border-color: black !important;
+    color: #89bdac;
+}
+
+.instance-table > :nth-child(odd) > * {
+  background-color: var(--instance-selected-color);
+}
+
+.table > :not(caption) > * > * {
+  padding: 0.35rem;
+  border-width: 1px 0px 1px 0px;
+  background-color: var(--bs-table-bg);
 }
 
 .instance-table-header {

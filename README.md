@@ -1,7 +1,5 @@
-# Orthanc Explorer 2
-
-This [Orthanc](https://www.orthanc-server.com) plugin implements a new 
-user interface for Orthanc to replace the Orthanc Explorer.
+# Orthanc Explorer 2 - Dark (green) mode
+This is a fork from Orthanc plugin to implement Dark Mode on the new user interface for Orthanc to replace the Orthanc Explorer.
 
 ## Installation
 

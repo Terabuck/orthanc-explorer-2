@@ -99,6 +99,7 @@ export default {
 
 <style scoped>
 .series-row-collapsed {
+background-color: var(--instance-selected-color);    
 }
 
 .series-row-expanded {
