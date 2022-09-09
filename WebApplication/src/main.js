@@ -1,5 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
+import i18n from './locales/i18n'
+import { createI18n } from "vue-i18n";
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap/dist/js/bootstrap.bundle.min.js"
 import "bootstrap-icons/font/bootstrap-icons.css"
@@ -12,9 +14,8 @@ import { router } from './router'
 import { VueClipboard } from '@soerenmartius/vue3-clipboard'
 
 const app = createApp(App)
-
 app.use(router)
 app.use(store)
 app.use(VueClipboard)
 
-app.mount('#app')
+app.use(i18n).mount('#app')

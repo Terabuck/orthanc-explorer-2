@@ -121,8 +121,8 @@ export default {
         filterModalities: {
             handler(newValue, oldValue) {
                 if (!this.updatingFilterUi && !this.initializingModalityFilter) {
-                //    console.log("StudyList: filterModalities watcher", newValue, oldValue);
-                   this.updateFilter('ModalitiesInStudy', this.getModalityFilter(), null);
+                    //    console.log("StudyList: filterModalities watcher", newValue, oldValue);
+                    this.updateFilter('ModalitiesInStudy', this.getModalityFilter(), null);
                 }
             },
             deep: true
@@ -161,12 +161,12 @@ export default {
         },
         initModalityFilter() {
             // console.log("StudyList: initModalityFilter", this.updatingFilterUi);
-            this.initializingModalityFilter=true;
+            this.initializingModalityFilter = true;
             this.filterModalities = {};
             for (const modality of this.uiOptions.ModalitiesFilter) {
                 this.filterModalities[modality] = true;
             }
-            this.initializingModalityFilter=false;
+            this.initializingModalityFilter = false;
         },
         getModalityFilter() {
             if (this.filterModalities === undefined) {
@@ -198,7 +198,7 @@ export default {
             }
         },
         updateFilter(dicomTagName, newValue, oldValue) {
-            
+
             if (this.updatingFilterUi) {
                 return;
             }
@@ -219,9 +219,9 @@ export default {
                 if (this.searchTimerHandler[dicomTagName]) {
                     clearTimeout(this.searchTimerHandler[dicomTagName]);
                 }
-                this.searchTimerHandler[dicomTagName] = setTimeout(() => {this._updateFilter(dicomTagName, newValue)}, this.uiOptions.StudyListSearchAsYouTypeDelay);
+                this.searchTimerHandler[dicomTagName] = setTimeout(() => { this._updateFilter(dicomTagName, newValue) }, this.uiOptions.StudyListSearchAsYouTypeDelay);
             } else if (newValue.length < oldValue.length && oldValue.length >= this.uiOptions.StudyListSearchAsYouTypeMinChars) { // when deleting filter
-                this.searchTimerHandler[dicomTagName] = setTimeout(() => {this._updateFilter(dicomTagName, "")}, this.uiOptions.StudyListSearchAsYouTypeDelay);
+                this.searchTimerHandler[dicomTagName] = setTimeout(() => { this._updateFilter(dicomTagName, "") }, this.uiOptions.StudyListSearchAsYouTypeDelay);
             }
         },
         clipFilter(dicomTagName, value) {
@@ -346,7 +346,7 @@ export default {
         },
         async search() {
             if (this.isSearching) {
-                await this.$store.dispatch('studies/cancelSearch');    
+                await this.$store.dispatch('studies/cancelSearch');
             } else {
                 await this.$store.dispatch('studies/clearFilterNoReload');
                 await this.$store.dispatch('studies/updateFilterNoReload', { dicomTagName: "StudyDate", value: this.filterStudyDate });
@@ -447,118 +447,129 @@ export default {
                 <th v-for="columnTag in uiOptions.StudyListColumns" :key="columnTag" data-bs-toggle="tooltip"
                     v-bind:title="columns[columnTag].tooltip" v-bind:width="columns[columnTag].width"
                     v-bind:class="'study-table-header cut-text ' + columns[columnTag].extraClasses">{{
-                            columns[columnTag].title
+                    columns[columnTag].title
                     }}</th>
             </thead>
             <thead class="study-filter" v-on:keyup.enter="search">
                 <th scope="col" class="px-2">
-                    <button @click="clearFilters" type="button"
-                        class="form-control study-list-filter btn filter-button" data-bs-toggle="tooltip"
-                        title="Clear filter">
+                    <button @click="clearFilters" type="button" class="form-control study-list-filter btn filter-button"
+                        data-bs-toggle="tooltip" title="Clear filter">
                         <i class="fa-regular fa-circle-xmark"></i>
                     </button>
                 </th>
                 <th v-if="isSearchButtonEnabled" scope="col" class="search-button">
                     <button @click="search" type="submit"
                         class="form-control study-list-filter btn filter-button btn-secondary" data-bs-toggle="tooltip"
-                        :class="{ 'is-searching': isSearching, 'is-not-searching': !isSearching }"
-                        title="Search">
+                        :class="{ 'is-searching': isSearching, 'is-not-searching': !isSearching }" title="Search">
                         <i v-if="!isSearching" class="fa-solid fa-magnifying-glass"></i>
-                        <span v-if="isSearching" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        <span v-if="isSearching" class="spinner-border spinner-border-sm" role="status"
+                            aria-hidden="true"></span>
                     </button>
                 </th>
                 <th v-for="columnTag in uiOptions.StudyListColumns" :key="columnTag">
                     <input v-if="columnTag == 'StudyDate'" type="text" class="form-control study-list-filter"
-                        v-model="filterStudyDate" placeholder="20220130" v-bind:class="getFilterClass('StudyDate')"/>
+                        v-model="filterStudyDate" placeholder="20220130" v-bind:class="getFilterClass('StudyDate')" />
                     <input v-if="columnTag == 'AccessionNumber'" type="text" class="form-control study-list-filter"
-                        v-model="filterAccessionNumber" placeholder="1234" v-bind:class="getFilterClass('AccessionNumber')"/>
+                        v-model="filterAccessionNumber" placeholder="1234"
+                        v-bind:class="getFilterClass('AccessionNumber')" />
                     <input v-if="columnTag == 'PatientID'" type="text" class="form-control study-list-filter"
-                        v-model="filterPatientID" placeholder="1234" v-bind:class="getFilterClass('PatientID')"/>
+                        v-model="filterPatientID" placeholder="1234" v-bind:class="getFilterClass('PatientID')" />
                     <input v-if="columnTag == 'PatientName'" type="text" class="form-control study-list-filter"
-                        v-model="filterPatientName" placeholder="John^Doe" v-bind:class="getFilterClass('PatientName')"/>
+                        v-model="filterPatientName" placeholder="John^Doe"
+                        v-bind:class="getFilterClass('PatientName')" />
                     <input v-if="columnTag == 'PatientBirthDate'" type="text" class="form-control study-list-filter"
-                        v-model="filterPatientBirthDate" placeholder="19740815" v-bind:class="getFilterClass('PatientBirthDate')"/>
+                        v-model="filterPatientBirthDate" placeholder="19740815"
+                        v-bind:class="getFilterClass('PatientBirthDate')" />
                     <div v-if="columnTag == 'modalities'" class="dropdown">
-                        <button type="button" class="btn btn-default btn-sm filter-button dropdown-toggle" data-bs-toggle="dropdown"
-                            id="dropdown-modalities-button" aria-expanded="false"><span
+                        <button type="button" class="btn btn-default btn-sm filter-button dropdown-toggle"
+                            data-bs-toggle="dropdown" id="dropdown-modalities-button" aria-expanded="false"><span
                                 class="fa fa-list"></span>&nbsp;<span class="caret"></span></button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdown-modalities-button" @click="modalityFilterClicked" id="modality-filter-dropdown">
-                            <li><label class="dropdown-item"><input type="checkbox" data-value="all" @click="toggleModalityFilter" v-model="allModalities" />&nbsp;All</label></li>
-                            <li><label class="dropdown-item"><input type="checkbox" data-value="none" @click="toggleModalityFilter" v-model="noneModalities" />&nbsp;None</label></li>
+                        <ul class="dropdown-menu" aria-labelledby="dropdown-modalities-button"
+                            @click="modalityFilterClicked" id="modality-filter-dropdown">
+                            <li><label class="dropdown-item"><input type="checkbox" data-value="all"
+                                        @click="toggleModalityFilter" v-model="allModalities" />&nbsp;All</label></li>
+                            <li><label class="dropdown-item"><input type="checkbox" data-value="none"
+                                        @click="toggleModalityFilter" v-model="noneModalities" />&nbsp;None</label></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
                             <li v-for="modality in uiOptions.ModalitiesFilter" :key="modality">
-                                <label class="dropdown-item"><input type="checkbox" v-bind:data-value="modality" v-model="filterModalities[modality]" />&nbsp;{{modality}}</label>
+                                <label class="dropdown-item"><input type="checkbox" v-bind:data-value="modality"
+                                        v-model="filterModalities[modality]" />&nbsp;{{modality}}</label>
                             </li>
-                            <li><button class="btn btn-primary mx-5" @click="closeModalityFilter" data-bs-toggle="dropdown">Close</button></li>
+                            <li><button class="btn btn-primary mx-5" @click="closeModalityFilter"
+                                    data-bs-toggle="dropdown">Close</button></li>
                         </ul>
                     </div>
                     <input v-if="columnTag == 'StudyDescription'" type="text" class="form-control study-list-filter"
                         v-model="filterStudyDescription" placeholder="Chest" />
                 </th>
             </thead>
-            <StudyItem v-for="studyId in studiesIds" :key="studyId" :studyId="studyId" :isSearchButtonEnabled="isSearchButtonEnabled" @deletedStudy="onDeletedStudy">
+            <StudyItem v-for="studyId in studiesIds" :key="studyId" :studyId="studyId"
+                :isSearchButtonEnabled="isSearchButtonEnabled" @deletedStudy="onDeletedStudy">
             </StudyItem>
         </table>
         <div v-if="!isSearching && notShowingAllResults" class="alert alert-danger bottom-fixed-alert" role="alert">
             <i class="bi bi-exclamation-triangle-fill"></i> Not showing all results. You should refine your search
             criteria !
         </div>
-        <div v-else-if="!isSearching && showEmptyStudyListIfNoSearch && this['studies/isFilterEmpty']" class="alert alert-warning bottom-fixed-alert" role="alert">
+        <div v-else-if="!isSearching && showEmptyStudyListIfNoSearch && this['studies/isFilterEmpty']"
+            class="alert alert-warning bottom-fixed-alert" role="alert">
             <i class="bi bi-exclamation-triangle-fill"></i> Enter a search criteria to show results !
         </div>
         <div v-else-if="!isSearching && isStudyListEmpty" class="alert alert-warning bottom-fixed-alert" role="alert">
             <i class="bi bi-exclamation-triangle-fill"></i> No result found !
         </div>
         <div v-else-if="isSearching" class="alert alert-secondary bottom-fixed-alert" role="alert">
-             <span v-if="isSearching" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Searching !
+            <span v-if="isSearching" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Searching !
+
         </div>
     </div>
 </template>
 
 <style>
 :root {
-  --filter-margin: 5px;
-  --filter-padding: 2px;
+    --filter-margin: 5px;
+    --filter-padding: 2px;
 }
 
 input.form-control.study-list-filter {
-  color: black;
-  margin-top: var(--filter-margin);
-  margin-bottom: var(--filter-margin);
-  padding-top: var(--filter-padding);
-  padding-bottom: var(--filter-padding);
-  padding-left: 0px;
-  background: #4f5f54;
+    color: black;
+    margin-top: var(--filter-margin);
+    margin-bottom: var(--filter-margin);
+    padding-top: var(--filter-padding);
+    padding-bottom: var(--filter-padding);
+    padding-left: 0px;
+    background: #4f5f54;
 }
 
 .btn {
-  color: var(--nav-side-color);
+    color: var(--nav-side-color);
 }
 
 .btn-primary {
-  color: var(--nav-side-color);
-  background-color: var(--series-selected-color);
-  border-color: var(--nav-side-color);
+    color: var(--nav-side-color);
+    background-color: var(--series-selected-color);
+    border-color: var(--nav-side-color);
 }
 
 .btn-primary:hover {
-  color: var(--nav-side-hover-bg-color);
-  background-color: var(--study-hover-color);
-  border-color: var(--series-hover-color);
+    color: var(--nav-side-hover-bg-color);
+    background-color: var(--study-hover-color);
+    border-color: var(--series-hover-color);
 }
 
 .btn-secondary {
-  background-color: transparent;
-  border-color: var(--nav-side-color);
-  padding: 0.25rem 0.5rem 0.1rem;
+    background-color: transparent;
+    border-color: var(--nav-side-color);
+    padding: 0.25rem 0.5rem 0.1rem;
 }
 
 button,
 select {
-  text-transform: none;
-  color: var(--nav-side-color);
+    text-transform: none;
+    color: var(--nav-side-color);
 }
 
 tbody,
@@ -567,100 +578,101 @@ tfoot,
 th,
 thead,
 tr {
-  border-style: hidden;
-  color: var(--nav-side-color);
+    border-style: hidden;
+    color: var(--nav-side-color);
 }
 
 .filter-button {
-  /* border: 1px solid #ced4da; */
+    /* border: 1px solid #ced4da; */
 }
 
 .search-button {
-  padding-left: 0px !important;
+    padding-left: 0px !important;
 }
 
 .is-not-searching {
-  background-color: #399637 !important;
-  border-color: #399637 !important;
+    background-color: #399637 !important;
+    border-color: #399637 !important;
 }
 
 .is-searching {
-  background-color: #fda90d86 !important;
-  border-color: #fda90d86 !important;
+    background-color: #fda90d86 !important;
+    border-color: #fda90d86 !important;
 }
 
 input.form-control.study-list-filter:not(:placeholder-shown) {
-  background-color: var(--nav-side-color);
+    background-color: var(--nav-side-color);
 }
 
 input.form-control.study-list-filter::placeholder {
-  color: rgb(200, 200, 200);
+    color: rgb(200, 200, 200);
 }
 
 button.form-control.study-list-filter {
-  color: #99d598;
-  margin-top: var(--filter-margin);
-  margin-bottom: var(--filter-margin);
-  padding-top: var(--filter-padding);
-  padding-bottom: var(--filter-padding);
+    color: #99d598;
+    margin-top: var(--filter-margin);
+    margin-bottom: var(--filter-margin);
+    padding-top: var(--filter-padding);
+    padding-bottom: var(--filter-padding);
 }
 
 .study-table-header {
-  text-align: left;
-  padding-left: 10px;
-  color: #89bdac;
+    text-align: left;
+    padding-left: 10px;
+    color: #89bdac;
 }
 
-.study-table > :not(:first-child) {
-  border-top: 0px !important;
-  color: #89bdac;
+.study-table> :not(:first-child) {
+    border-top: 0px !important;
+    color: #89bdac;
 }
 
-.study-table > :nth-child(odd) > * {
-  background-color: var(--bs-table-bg);
+.study-table> :nth-child(odd)>* {
+    background-color: var(--bs-table-bg);
 }
 
-.study-table > :not(caption) > * > * {
-  padding: 0.35rem;
-  border-width: 1px 0px 1px 0px;
-  border-bottom-color: var(--study-selected-color);
-  border-top-color: var(--bs-table-bg);
+.study-table> :not(caption)>*>* {
+    padding: 0.35rem;
+    border-width: 1px 0px 1px 0px;
+    border-bottom-color: var(--study-selected-color);
+    border-top-color: var(--bs-table-bg);
 }
 
 .study-filter th {
-  text-align: left;
-  padding-left: 10px;
-  background-color: #3e4a42;
-  padding-top: 0px;
-  padding-bottom: 0px;
+    text-align: left;
+    padding-left: 10px;
+    background-color: #3e4a42;
+    padding-top: 0px;
+    padding-bottom: 0px;
 }
 
 .study-table td {
-  text-align: left;
-  padding-left: 10px;
+    text-align: left;
+    padding-left: 10px;
 }
 
 .bottom-fixed-alert {
-  position: fixed !important;
-  bottom: 0px;
-  width: 100%;
-  font-size: large;
-  font-weight: 600;
-  text-align: left;
-  padding-left: 50px !important;
+    position: fixed !important;
+    bottom: 0px;
+    width: 100%;
+    font-size: large;
+    font-weight: 600;
+    text-align: left;
+    padding-left: 50px !important;
 }
 
 .is-invalid-filter {
-  /* background-color: #f7dddf !important; */
-  border-color: red !important;
-  box-shadow: 0 0 0 0.25rem rgba(255, 0, 0, 0.25) !important;
+    /* background-color: #f7dddf !important; */
+    border-color: red !important;
+    box-shadow: 0 0 0 0.25rem rgba(255, 0, 0, 0.25) !important;
 }
 
 .dropdown-menu {
-  background-color: #4f5f54;;
+    background-color: #4f5f54;
+    ;
 }
 
 .dropdown-item {
-  color: #b7c2a3;
+    color: #b7c2a3;
 }
 </style>

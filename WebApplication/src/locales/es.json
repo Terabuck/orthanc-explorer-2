@@ -1,0 +1,22 @@
+{
+    "accessionNumber": "Número de acceso",
+    "betaVersion": "Esta es la versión beta!",
+    "description": "Descripción",
+    "institutionName": "Nombre de la institución",
+    "modalitiesInStudy": "Modalities in Study",
+    "numberOfSeries": "Número de Series",
+    "legacyUI": "Interfaz heredada",
+    "localStudies": "Estudios locales",
+    "patientBirthDate": "Fecha de nacimiento del paciente",
+    "patientID": "ID del paciente",
+    "patientName": "Nombre del paciente",
+    "requestingPhysician": "Médico solicitante",
+    "referringPhysicianName": "Médico referente",
+    "settings": "Configuraciones",
+    "selectFolder": "Seleccione la carpeta",
+    "selectFiles": "Seleccione el archivo",
+    "studyDate": "Fecha del estudio",
+    "studyTime": "Tiempo de estudio",
+    "studyDescription": "Descripción del estudio",
+    "upload": "Cargar archivo"
+}

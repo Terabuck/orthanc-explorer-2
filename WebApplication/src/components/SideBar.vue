@@ -5,7 +5,7 @@ import JobsList from "./JobsList.vue";
 import { mapState } from "vuex"
 import { orthancApiUrl, oe2ApiUrl } from "../globalConfigurations";
 import api from "../orthancApi"
-
+import Select from "./common/select.vue"
 export default {
     props: [],
     emits: [],
@@ -71,7 +71,7 @@ export default {
                     this.modalitiesEchoStatus[modality] = false;
                 })
             }
-    });
+        });
     },
     components: { UploadHandler, JobsList },
 }
@@ -89,7 +89,8 @@ export default {
                 <li class="d-flex align-items-center fix-router-link">
                     <router-link class="router-link" to="/">
                         <i class="fa fa-x-ray fa-lg menu-icon"></i>Local studies
-                        <span class="study-count ms-auto">{{ displayedStudyCount }} / {{ statistics.CountStudies }}</span>
+                        <span class="study-count ms-auto">{{ displayedStudyCount }} / {{ statistics.CountStudies
+                        }}</span>
                     </router-link>
                 </li>
 
@@ -108,16 +109,19 @@ export default {
                     <span class="arrow ms-auto"></span>
                 </li>
                 <ul class="sub-menu collapse" id="modalities-list" ref="modalities-collapsible">
-                    <li v-for="modality in queryableDicomModalities" :key="modality" v-bind:class="{'active': this.isSelectedModality(modality)}" @click="selectModality(modality)">
-                        <router-link class="router-link" :to="{ path: '/filtered-remote-studies', query : { remoteMode: 'dicom', remoteSource: modality}}">
+                    <li v-for="modality in queryableDicomModalities" :key="modality"
+                        v-bind:class="{'active': this.isSelectedModality(modality)}" @click="selectModality(modality)">
+                        <router-link class="router-link"
+                            :to="{ path: '/filtered-remote-studies', query : { remoteMode: 'dicom', remoteSource: modality}}">
                             {{ modality }}
                         </router-link>
-                        <span v-if="this.isEchoRunning(modality)" class="ms-auto spinner-border spinner-border-sm" data-bs-toggle="tooltip"
-                        title="Checking connectivity"></span>
-                        <span v-else-if="this.isEchoSuccess(modality)" class="ms-auto"><i class="bi bi-check2 text-success echo-status" data-bs-toggle="tooltip"
-                        title="C-Echo succeeded"></i></span>
-                        <span v-else class="ms-auto"><i class="bi bi-x-lg text-danger echo-status" data-bs-toggle="tooltip"
-                        title="C-Echo failed"></i></span>
+                        <span v-if="this.isEchoRunning(modality)" class="ms-auto spinner-border spinner-border-sm"
+                            data-bs-toggle="tooltip" title="Checking connectivity"></span>
+                        <span v-else-if="this.isEchoSuccess(modality)" class="ms-auto"><i
+                                class="bi bi-check2 text-success echo-status" data-bs-toggle="tooltip"
+                                title="C-Echo succeeded"></i></span>
+                        <span v-else class="ms-auto"><i class="bi bi-x-lg text-danger echo-status"
+                                data-bs-toggle="tooltip" title="C-Echo failed"></i></span>
                     </li>
                 </ul>
 
@@ -148,6 +152,9 @@ export default {
                         <i class="fa fa-solid fa-bars-progress fa-lg menu-icon"></i>My jobs
                     </a><span class="ms-auto"></span>
                 </li>
+
+                <b>Select-idioma</b>
+
                 <div v-if="hasJobs" class="collapse show" id="jobs-list">
                     <JobsList />
                 </div>
@@ -161,9 +168,11 @@ export default {
     width: 100%;
     text-align: left;
 }
+
 .fix-router-link {
     margin-left: -20px !important;
 }
+
 .echo-status {
     font-size: 17px;
 }
@@ -218,6 +227,7 @@ export default {
     padding-right: 0px;
     float: right;
 }
+
 .nav-side-menu ul .active,
 .nav-side-menu li .active {
     border-left: 3px solid #d19b3d;
@@ -288,6 +298,7 @@ export default {
 .nav-side-menu .menu-list .menu-content {
     display: block;
 }
+
 .nav-side-menu .menu-list .menu-content {
     display: block;
 }
@@ -302,5 +313,4 @@ export default {
     width: 20px;
     margin-right: 10px;
 }
-
 </style>
