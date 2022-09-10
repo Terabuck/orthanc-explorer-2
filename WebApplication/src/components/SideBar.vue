@@ -5,7 +5,8 @@ import JobsList from "./JobsList.vue";
 import { mapState } from "vuex"
 import { orthancApiUrl, oe2ApiUrl } from "../globalConfigurations";
 import api from "../orthancApi"
-import Select from "./common/select.vue"
+import DropDown from "./common/Dropdown.vue"
+import Dropdown from "./common/Dropdown.vue"
 export default {
     props: [],
     emits: [],
@@ -73,7 +74,7 @@ export default {
             }
         });
     },
-    components: { UploadHandler, JobsList },
+    components: { UploadHandler, JobsList, Dropdown },
 }
 </script>
 <template>
@@ -153,7 +154,9 @@ export default {
                     </a><span class="ms-auto"></span>
                 </li>
 
-                <b>Select-idioma</b>
+                <li>
+                    <Dropdown />
+                </li>
 
                 <div v-if="hasJobs" class="collapse show" id="jobs-list">
                     <JobsList />
