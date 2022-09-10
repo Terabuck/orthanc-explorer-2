@@ -9,43 +9,43 @@ document._allowedFilters = ["StudyDate", "StudyTime", "AccessionNumber", "Patien
 document._studyColumns = {
     "StudyDate": {
         "width": "7%",
-        "title": "Study Date",
+        "title": "study_date",
         "tooltip": "Study Date"
     },
     "AccessionNumber": {
         "width": "11%",
-        "title": "Accession Number",
+        "title": "accession_number",
         "tooltip": "Accession Number"
     },
     "PatientID": {
         "width": "11%",
-        "title": "Patient ID",
+        "title": "patient_id",
         "tooltip": "Patient ID"
     },
     "PatientName": {
         "width": "15%",
-        "title": "Patient Name",
+        "title": "patient_name",
         "tooltip": "Patient Name"
     },
     "PatientBirthDate": {
         "width": "7%",
-        "title": "Patient Birth Date",
+        "title": "patient_birth_date",
         "tooltip": "Patient Birth Date"
     },
     "StudyDescription": {
         "width": "25%",
-        "title": "Description",
+        "title": "description",
         "tooltip": "Study Description"
     },
     "modalities": {
         "width": "6%",
-        "title": "Modalities",
+        "title": "modalities_in_study",
         "tooltip": "Modalities in Study",
         "extraClasses": "text-center"
     },
     "seriesCount": {
         "width": "4%",
-        "title": "# series",
+        "title": "_#series",
         "tooltip": "Number of Series",
         "extraClasses": "text-center"
     },
@@ -447,7 +447,7 @@ export default {
                 <th v-for="columnTag in uiOptions.StudyListColumns" :key="columnTag" data-bs-toggle="tooltip"
                     v-bind:title="columns[columnTag].tooltip" v-bind:width="columns[columnTag].width"
                     v-bind:class="'study-table-header cut-text ' + columns[columnTag].extraClasses">{{
-                    columns[columnTag].title
+                    $t(`${columns[columnTag].title}`)
                     }}</th>
             </thead>
             <thead class="study-filter" v-on:keyup.enter="search">
