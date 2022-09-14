@@ -181,15 +181,15 @@ export default {
 <template>
     <div>
         <div class="upload-handler-drop-zone" @drop="this.onDrop" @dragover="this.onDragOver">
-            <div class="mb-3">Drop files here or</div>
+            <div class="mb-3">{{$t('drop_files')}}</div>
                 <div class="mb-3">
                 <label class="btn btn-primary btn-file">
-                Select folder <input type="file" style="display: none;" id="foldersUpload" required multiple directory webkitdirectory allowdirs>
+                {{$t('select_folder')}} <input type="file" style="display: none;" id="foldersUpload" required multiple directory webkitdirectory allowdirs>
                 </label>
             </div>
             <div class="mb-3">
                 <label class="btn btn-primary btn-file">
-                Select files <input type="file" style="display: none;" id="filesUpload" required multiple>
+                    {{$t('select_files')}} <input type="file" style="display: none;" id="filesUpload" required multiple>
                 </label>
             </div>
         </div>

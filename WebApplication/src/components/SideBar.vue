@@ -89,7 +89,7 @@ export default {
             <ul id="menu-content" class="menu-content collapse out">
                 <li class="d-flex align-items-center fix-router-link">
                     <router-link class="router-link" to="/">
-                        <i class="fa fa-x-ray fa-lg menu-icon"></i>Local studies
+                        <i class="fa fa-x-ray fa-lg menu-icon"></i>{{$t('local_studies')}}
                         <span class="study-count ms-auto">{{ displayedStudyCount }} / {{ statistics.CountStudies
                         }}</span>
                     </router-link>
@@ -97,7 +97,7 @@ export default {
 
                 <li v-if="uiOptions.EnableUpload" class="d-flex align-items-center" data-bs-toggle="collapse"
                     data-bs-target="#upload-handler">
-                    <i class="fa fa-file-upload fa-lg menu-icon"></i>Upload
+                    <i class="fa fa-file-upload fa-lg menu-icon"></i>{{$t('upload')}}
                     <span class="ms-auto"></span>
                 </li>
                 <div v-if="uiOptions.EnableUpload" class="collapse" id="upload-handler">
@@ -139,7 +139,7 @@ export default {
 
                 <li v-if="hasAccessToSettings" class="d-flex align-items-center fix-router-link">
                     <router-link class="router-link" to="/settings">
-                        <i class="fa fa-cogs fa-lg menu-icon"></i>Settings
+                        <i class="fa fa-cogs fa-lg menu-icon"></i>{{$t('settings')}}
                     </router-link>
                 </li>
 
