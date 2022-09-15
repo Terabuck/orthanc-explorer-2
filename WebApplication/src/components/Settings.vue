@@ -51,7 +51,7 @@ export default {
                         <td class="value">{{ statistics.CountStudies }}</td>
                     </tr>
                     <tr>
-                        <th scope="row" class="header"># {{$t('series')}}Series</th>
+                        <th scope="row" class="header"># {{$t('series')}}</th>
                         <td class="value">{{ statistics.CountSeries }}</td>
                     </tr>
                     <tr>
