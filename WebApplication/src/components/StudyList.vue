@@ -10,43 +10,43 @@ document._studyColumns = {
     "StudyDate": {
         "width": "7%",
         "title": "study_date",
-        "tooltip": "Study Date"
+        "tooltip": "study_date"
     },
     "AccessionNumber": {
         "width": "11%",
         "title": "accession_number",
-        "tooltip": "Accession Number"
+        "tooltip": "accession_number"
     },
     "PatientID": {
         "width": "11%",
         "title": "patient_id",
-        "tooltip": "Patient ID"
+        "tooltip": "patient_id"
     },
     "PatientName": {
         "width": "15%",
         "title": "patient_name",
-        "tooltip": "Patient Name"
+        "tooltip": "patient_name"
     },
     "PatientBirthDate": {
         "width": "7%",
         "title": "patient_birth_date",
-        "tooltip": "Patient Birth Date"
+        "tooltip": "patient_birth_date"
     },
     "StudyDescription": {
         "width": "25%",
         "title": "description",
-        "tooltip": "Study Description"
+        "tooltip": "study_description"
     },
     "modalities": {
         "width": "6%",
         "title": "modalities_in_study",
-        "tooltip": "Modalities in Study",
+        "tooltip": "modalities_in_study",
         "extraClasses": "text-center"
     },
     "seriesCount": {
         "width": "4%",
         "title": "series",
-        "tooltip": "Number of Series",
+        "tooltip": "number_of_series",
         "extraClasses": "text-center"
     },
 }
@@ -445,7 +445,7 @@ export default {
                 <th width="2%" scope="col" class="study-table-header"></th>
                 <th v-if="isSearchButtonEnabled" width="5%" scope="col" class="study-table-header"></th>
                 <th v-for="columnTag in uiOptions.StudyListColumns" :key="columnTag" data-bs-toggle="tooltip"
-                    v-bind:title="columns[columnTag].tooltip" v-bind:width="columns[columnTag].width"
+                    v-bind:title="`${$t(`${columns[columnTag].tooltip}`)}`" v-bind:width="columns[columnTag].width"
                     v-bind:class="'study-table-header cut-text ' + columns[columnTag].extraClasses">{{
                     $t(`${columns[columnTag].title}`)
                     }}</th>
@@ -487,9 +487,11 @@ export default {
                         <ul class="dropdown-menu" aria-labelledby="dropdown-modalities-button"
                             @click="modalityFilterClicked" id="modality-filter-dropdown">
                             <li><label class="dropdown-item"><input type="checkbox" data-value="all"
-                                        @click="toggleModalityFilter" v-model="allModalities" />&nbsp;{{$t('all')}}</label></li>
+                                        @click="toggleModalityFilter"
+                                        v-model="allModalities" />&nbsp;{{$t('all')}}</label></li>
                             <li><label class="dropdown-item"><input type="checkbox" data-value="none"
-                                        @click="toggleModalityFilter" v-model="noneModalities" />&nbsp;{{$t('none')}}</label></li>
+                                        @click="toggleModalityFilter"
+                                        v-model="noneModalities" />&nbsp;{{$t('none')}}</label></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>

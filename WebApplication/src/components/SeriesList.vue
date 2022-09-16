@@ -43,13 +43,13 @@ export default {
         <thead>
             <th width="2%" scope="col" class="series-table-header"></th>
             <th width="7%" scope="col" class="series-table-header cut-text" data-bs-toggle="tooltip"
-                title="Series Number">{{$t('series')}}</th>
+                v-bind:title="`${$t('number_of_series')}`">{{$t('series')}}</th>
             <th width="40%" scope="col" class="series-table-header cut-text" data-bs-toggle="tooltip"
-                title="Series Description">{{$t('series_description')}}</th>
+                v-bind:title="`${$t('series_description')}`">{{$t('series_description')}}</th>
             <th width="11%" scope="col" class="series-table-header cut-text text-center" data-bs-toggle="tooltip"
-                title="Modality">{{$t('modality')}}</th>
+                v-bind:title="`${$t('modality')}`">{{$t('modality')}}</th>
             <th width="5%" scope="col" class="series-table-header cut-text text-center" data-bs-toggle="tooltip"
-                title="Number of Instances"># {{$t('instances')}}</th>
+                v-bind:title="`${$t('instances_number')}`"># {{$t('instances')}}</th>
         </thead>
         <SeriesItem v-for="seriesId in sortedSeriesIds" :key="seriesId" :seriesId="seriesId"
             :seriesInfo="seriesInfo[seriesId]" @deletedSeries="onDeletedSeries"></SeriesItem>
