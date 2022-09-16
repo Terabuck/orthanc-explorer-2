@@ -145,7 +145,7 @@ export default {
 
                 <li v-if="uiOptions.EnableLinkToLegacyUi" class="d-flex align-items-center fix-router-link">
                     <a v-bind:href="this.orthancApiUrl + 'app/explorer.html'">
-                        <i class="fa fa-solid fa-backward fa-lg menu-icon"></i>Legacy UI
+                        <i class="fa fa-solid fa-backward fa-lg menu-icon"></i>{{$t('legacy_ui')}}
                     </a><span class="ms-auto"></span>
                 </li>
                 <li v-if="hasJobs" class="d-flex align-items-center">

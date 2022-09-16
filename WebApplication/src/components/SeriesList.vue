@@ -42,76 +42,51 @@ export default {
     <table class="table table-responsive table-sm series-table">
         <thead>
             <th width="2%" scope="col" class="series-table-header"></th>
-            <th
-                width="7%"
-                scope="col"
-                class="series-table-header cut-text"
-                data-bs-toggle="tooltip"
-                title="Series Number"
-            >Series Number</th>
-            <th
-                width="40%"
-                scope="col"
-                class="series-table-header cut-text"
-                data-bs-toggle="tooltip"
-                title="Series Description"
-            >Series Description</th>
-            <th
-                width="11%"
-                scope="col"
-                class="series-table-header cut-text text-center"
-                data-bs-toggle="tooltip"
-                title="Modality"
-            >Modality</th>
-            <th
-                width="5%"
-                scope="col"
-                class="series-table-header cut-text text-center"
-                data-bs-toggle="tooltip"
-                title="Number of Instances"
-            ># instances</th>
+            <th width="7%" scope="col" class="series-table-header cut-text" data-bs-toggle="tooltip"
+                title="Series Number">{{$t('series')}}</th>
+            <th width="40%" scope="col" class="series-table-header cut-text" data-bs-toggle="tooltip"
+                title="Series Description">{{$t('series_description')}}</th>
+            <th width="11%" scope="col" class="series-table-header cut-text text-center" data-bs-toggle="tooltip"
+                title="Modality">{{$t('modality')}}</th>
+            <th width="5%" scope="col" class="series-table-header cut-text text-center" data-bs-toggle="tooltip"
+                title="Number of Instances"># {{$t('instances')}}</th>
         </thead>
-        <SeriesItem
-            v-for="seriesId in sortedSeriesIds"
-            :key="seriesId"
-            :seriesId="seriesId"
-            :seriesInfo="seriesInfo[seriesId]"
-            @deletedSeries="onDeletedSeries"
-        ></SeriesItem>
+        <SeriesItem v-for="seriesId in sortedSeriesIds" :key="seriesId" :seriesId="seriesId"
+            :seriesInfo="seriesInfo[seriesId]" @deletedSeries="onDeletedSeries"></SeriesItem>
     </table>
 </template>
 
 <style>
-.series-table > :not(:first-child) {
-  border-top: 0px !important;
-  color: #acdbcc;
+.series-table> :not(:first-child) {
+    border-top: 0px !important;
+    color: #acdbcc;
 }
 
-.series-table > :first-child {
-  border-bottom: 2px !important;
-  border-style: solid !important;
-  border-color: black !important;
-  color: #89bdac;
+.series-table> :first-child {
+    border-bottom: 2px !important;
+    border-style: solid !important;
+    border-color: black !important;
+    color: #89bdac;
 }
 
-.series-table > :nth-child(odd) > * {
-  background-color: var(--series-selected-color);
+.series-table> :nth-child(odd)>* {
+    background-color: var(--series-selected-color);
 }
 
-.table > :not(caption) > * > * {
-  padding: 0.35rem;
-  border-width: 1px 0px 1px 0px;
-  background-color: var(--bs-table-bg);
+.table> :not(caption)>*>* {
+    padding: 0.35rem;
+    border-width: 1px 0px 1px 0px;
+    background-color: var(--bs-table-bg);
 }
 
 .series-table-header {
-  text-align: left;
-  padding-left: 10px;
-  padding-top: 6px;
+    text-align: left;
+    padding-left: 10px;
+    padding-top: 6px;
 }
 
 .series-table td {
-  text-align: left;
-  padding-left: 10px;
+    text-align: left;
+    padding-left: 10px;
 }
 </style>
