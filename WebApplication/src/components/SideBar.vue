@@ -6,6 +6,7 @@ import { mapState } from "vuex"
 import { orthancApiUrl, oe2ApiUrl } from "../globalConfigurations";
 import api from "../orthancApi"
 import Dropdown from "./Dropdown.vue"
+
 export default {
     props: [],
     emits: [],
