@@ -608,7 +608,7 @@ button.form-control.study-list-filter {
 
 .study-table-header {
     text-align: left;
-    padding-left: 10px;
+    padding-left: 2px;
     color: #89bdac;
 }
 
@@ -630,7 +630,7 @@ button.form-control.study-list-filter {
 
 .study-filter th {
     text-align: left;
-    padding-left: 10px;
+    padding-left: 2px;
     background-color: #3e4a42;
     padding-top: 0px;
     padding-bottom: 0px;
@@ -638,7 +638,7 @@ button.form-control.study-list-filter {
 
 .study-table td {
     text-align: left;
-    padding-left: 10px;
+    padding-left: 2px;
 }
 
 .bottom-fixed-alert {

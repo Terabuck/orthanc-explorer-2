@@ -87,6 +87,6 @@ export default {
 </style>
 <style>
 .study-button-group i {
-    font-size: 1.4rem;
+    font-size: 1rem;
 }
 </style>

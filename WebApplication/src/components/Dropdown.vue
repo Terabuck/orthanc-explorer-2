@@ -60,6 +60,7 @@ export default {
     margin-top: var(--details-top-margin);
     background-color: var(--study-selected-color);
     font-size: 0.9rem;
+    --bs-dropdown-item-padding-y: 0.05rem;
 }
 </style>
     
