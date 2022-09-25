@@ -1,7 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import i18n from './locales/i18n'
-import { createI18n } from "vue-i18n";
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap/dist/js/bootstrap.bundle.min.js"
 import "bootstrap-icons/font/bootstrap-icons.css"

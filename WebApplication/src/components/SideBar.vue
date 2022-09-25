@@ -5,8 +5,8 @@ import JobsList from "./JobsList.vue";
 import { mapState } from "vuex"
 import { orthancApiUrl, oe2ApiUrl } from "../globalConfigurations";
 import api from "../orthancApi"
-import DropDown from "./common/Dropdown.vue"
-import Dropdown from "./common/Dropdown.vue"
+import Dropdown from "./Dropdown.vue"
+
 export default {
     props: [],
     emits: [],

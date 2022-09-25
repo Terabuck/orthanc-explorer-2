@@ -2,10 +2,10 @@
     --nav-bar-width: 220px;
 
     --study-hover-color: #4e8144;
-    --study-selected-color: #404443;
+    --study-selected-color: #343837;
 
     --series-hover-color:#4e8144;
-    --series-selected-color: #313635;
+    --series-selected-color: #232726;
 
     --instance-hover-color: #4e8144;
     --instance-selected-color: #212625;
@@ -13,12 +13,12 @@
     --details-top-margin: 2px;
 
     --nav-side-color: #9fae98;
-    --nav-side-bg-color: #2e3d33;
-    --nav-side-selected-bg-color: #323935;
-    --nav-side-hover-bg-color: #2f3b35;
+    --nav-side-bg-color: #1f2922;
+    --nav-side-selected-bg-color: #191d1b;
+    --nav-side-hover-bg-color: #28332d;
     --nav-side-submenu-color: #39a25c;
 
-    --bs-body-bg: #333;
+    --bs-body-bg: #1d1d1def;
     --bs-body-line-height: 1.0rem;
     --bs-body-font-size: 0.9rem;
 
