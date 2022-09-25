@@ -547,25 +547,13 @@ input.form-control.study-list-filter {
 }
 
 .btn {
-    color: var(--nav-side-color);
-}
-
-.btn-primary {
-    color: var(--nav-side-color);
-    background-color: var(--series-selected-color);
-    border-color: var(--nav-side-color);
-}
-
-.btn-primary:hover {
-    color: var(--nav-side-hover-bg-color);
-    background-color: var(--study-hover-color);
-    border-color: var(--series-hover-color);
+  color: var(--nav-side-color);
 }
 
 .btn-secondary {
-    background-color: transparent;
-    border-color: var(--nav-side-color);
-    padding: 0.25rem 0.5rem 0.1rem;
+  background-color: transparent;
+  border-color: var(--nav-side-color);
+  padding: 0.25rem 0.5rem 0.1rem;
 }
 
 button,
@@ -670,11 +658,10 @@ button.form-control.study-list-filter {
 }
 
 .dropdown-menu {
-    background-color: #4f5f54;
-    ;
+    --bs-dropdown-border-color: var(--nav-side-color);
 }
 
 .dropdown-item {
-    color: #b7c2a3;
+  color: var(--nav-side-color);
 }
 </style>

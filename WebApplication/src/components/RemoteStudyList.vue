@@ -602,18 +602,6 @@ input.form-control.study-list-filter {
   color: var(--nav-side-color);
 }
 
-.btn-primary {
-  color: var(--nav-side-color);
-  background-color: var(--series-selected-color);
-  border-color: var(--nav-side-color);
-}
-
-.btn-primary:hover {
-  color: var(--nav-side-hover-bg-color);
-  background-color: var(--study-hover-color);
-  border-color: var(--series-hover-color);
-}
-
 .btn-secondary {
   background-color: transparent;
   border-color: var(--nav-side-color);
@@ -721,11 +709,7 @@ button.form-control.study-list-filter {
   box-shadow: 0 0 0 0.25rem rgba(255, 0, 0, 0.25) !important;
 }
 
-.dropdown-menu {
-  background-color: #4f5f54;
-}
-
 .dropdown-item {
-  color: #b7c2a3;
+  color: var(--nav-side-color);
 }
 </style>
