@@ -52,9 +52,9 @@
     "study_date": "Дата исследования",
     "study_time": "Учебное время",
     "study_description": "Описание исследования",
-    "system_version_undefined": "Не определено",
+    "system_version_undefined": "Неопределенная версия системы",
     "trace": "След",
-    "total_disk_size_undefined": "Не определено",
+    "total_disk_size_undefined": "Общий размер диска не определен",
     "upload": "Загрузить файл",
     "verbose": "Подробный",
     "verbosity_level": "Уровень детализации"
