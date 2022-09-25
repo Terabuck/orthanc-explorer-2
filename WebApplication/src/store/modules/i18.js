@@ -10,7 +10,7 @@ let langs = [
     { name: 'Nederlands', abbreviation: 'nl' },
     { name: '日本語', abbreviation: 'jp' },
     { name: 'বাংলা', abbreviation: 'bn' },
-    { name: 'Bahasa', abbreviation: 'in' },
+    { name: 'Bahasa', abbreviation: 'xn' },
     { name: 'हिंदू', abbreviation: 'hi' },
     { name: 'Kiswahili', abbreviation: 'sw' },
     { name: '中文', abbreviation: 'zh' }
