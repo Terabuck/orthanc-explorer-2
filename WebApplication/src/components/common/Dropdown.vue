@@ -1,21 +1,41 @@
 <script>
+import langs from '../../const/i18';
+export default {
+  name: 'App',
+  data() {
+    return {
+      langs,
+      option: ''
+    };
 
+  },
+  created() {
+    this.option = 'English'
+  },
+  methods: {
+    changeLanguage(key, name) {
+      this.$i18n.locale = key;
+      this.option = name
+    }
+  },
+
+
+}
 </script>
     
 <template>
-    <div class="dropdown">
-        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-            data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="bi bi-translate"></i> Languages
-        </a>
-
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <li><a class="dropdown-item" href="#">English</a></li>
-            <li><a class="dropdown-item" href="#">Español</a></li>
-        </ul>
-    </div>
+  <div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+      aria-expanded="false">
+      <i class="bi bi-translate"></i> {{option}}
+    </button>
+    <ul class="dropdown-menu">
+      <li v-for="(lang, i) in langs" :key="`lang-${i}`" :value="lang"><a class="dropdown-item" href="#"
+          @click="changeLanguage(`${lang.abbreviation}`,`${lang.name}`)">{{lang.name}}</a></li>
+    </ul>
+  </div>
 </template>
-    
+
 <style>
 
 </style>
