@@ -52,9 +52,9 @@
     "study_date": "研究日",
     "study_time": "勉強時間",
     "study_description": "研究の説明",
-    "system_version_undefined": "未定義",
+    "system_version_undefined": "未定義のシステム バージョン",
     "trace": "トレース",
-    "total_disk_size_undefined": "未定義",
+    "total_disk_size_undefined": "総ディスクサイズ未定義",
     "upload": "ファイルをアップロード",
     "verbose": "詳細",
     "verbosity_level": "詳細レベル"

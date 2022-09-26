@@ -52,9 +52,9 @@
     "study_date": "Studydatum",
     "study_time": "Studytijd",
     "study_description": "Studybeschrijving",
-    "system_version_undefined": "Niet gedefinieerd",
-    "trace": "Trace",
-    "total_disk_size_undefined": "Indefinido",
+    "system_version_undefined": "Systeemversie niet gedefinieerd",
+    "trace": "traceer",
+    "total_disk_size_undefined": "Totale schijfgrootte niet gedefinieerd",
     "upload": "Uploaden",
     "verbose": "Uitgebreid",
     "verbosity_level": "Verbosity-niveau"

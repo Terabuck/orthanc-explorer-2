@@ -5,9 +5,13 @@ import fr from "./fr.json";
 import it from "./it.json";
 import pt from "./pt.json";
 import ru from "./ru.json";
-import gr from "./gr.json";
+import de from "./de.json";
 import nl from "./nl.json";
 import jp from "./jp.json";
+import bn from "./bn.json";
+import xn from "./in.json";
+import hi from "./hi.json";
+import sw from "./sw.json";
 import zh from "./zh.json";
 const i18n = createI18n({
   locale: "en",
@@ -18,9 +22,13 @@ const i18n = createI18n({
     it,
     pt,
     ru,
-    gr,
+    de,
     nl,
     jp,
+    xn,
+    bn,
+    hi,
+    sw,
     zh,
   },
 });

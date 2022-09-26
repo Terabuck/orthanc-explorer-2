@@ -548,6 +548,8 @@ input.form-control.study-list-filter {
 
 .btn {
   color: var(--nav-side-color);
+  --bs-btn-padding-x: 0.5rem;  
+  --bs-btn-padding-y: 0.2375rem 0.5rem 0.075rem;
 }
 
 .btn-secondary {
@@ -608,7 +610,7 @@ button.form-control.study-list-filter {
 
 .study-table-header {
     text-align: left;
-    padding-left: 10px;
+    padding-left: 4px;
     color: #89bdac;
 }
 
@@ -630,7 +632,7 @@ button.form-control.study-list-filter {
 
 .study-filter th {
     text-align: left;
-    padding-left: 10px;
+    padding-left: 4px;
     background-color: #3e4a42;
     padding-top: 0px;
     padding-bottom: 0px;
@@ -638,7 +640,7 @@ button.form-control.study-list-filter {
 
 .study-table td {
     text-align: left;
-    padding-left: 10px;
+    padding-left: 4px;
 }
 
 .bottom-fixed-alert {

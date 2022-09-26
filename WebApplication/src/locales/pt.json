@@ -52,10 +52,10 @@
     "study_date": "Data do estudo",
     "study_time": "Hora do estudo",
     "study_description": "Descrição do estudo",
-    "system_version_undefined": "Indefinido",
+    "system_version_undefined": "Versão do sistema indefinida",
     "trace": "Trace",
-    "total_disk_size_undefined": "Indefinido",
-    "upload": "Carregar arquivo",
+    "total_disk_size_undefined": "Tamanho total do disco indefinido",
+    "upload": "Carregar",
     "verbose": "Verboso",
     "verbosity_level": "Nível de verbosidade"
 }

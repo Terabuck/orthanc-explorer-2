@@ -52,9 +52,9 @@
     "study_date": "学习日期",
     "study_time": "学习时间",
     "study_description": "研究说明",
-    "system_version_undefined": "不明确的",
+    "system_version_undefined": "未定义的系统版本",
     "trace": "追踪",
-    "total_disk_size_undefined": "不明确的",
+    "total_disk_size_undefined": "未定义总磁盘大小",
     "upload": "上传文件",
     "verbose": "冗长",
     "verbosity_level": "详细程度"

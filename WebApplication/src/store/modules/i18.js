@@ -1,14 +1,18 @@
 
 let langs = [
+    { name: 'English', abbreviation: 'en' },
     { name: 'Español', abbreviation: 'es' },
     { name: 'Française', abbreviation: 'fr' },
     { name: 'Italiano', abbreviation: 'it' },
-    { name: 'Русский', abbreviation: 'ru' },
-    { name: 'Deutsche', abbreviation: 'gr' },
-    { name: 'Nederlands', abbreviation: 'nl' },
     { name: 'Português', abbreviation: 'pt' },
+    { name: 'Русский', abbreviation: 'ru' },
+    { name: 'Deutsche', abbreviation: 'de' },
+    { name: 'Nederlands', abbreviation: 'nl' },
     { name: '日本語', abbreviation: 'jp' },
-    { name: '中文', abbreviation: 'zh' },
-    { name: 'English', abbreviation: 'en' }
+    { name: 'বাংলা', abbreviation: 'bn' },
+    { name: 'Bahasa', abbreviation: 'xn' },
+    { name: 'हिंदू', abbreviation: 'hi' },
+    { name: 'Kiswahili', abbreviation: 'sw' },
+    { name: '中文', abbreviation: 'zh' }
 ]
 export default langs;

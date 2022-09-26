@@ -1,5 +1,5 @@
 :root {
-    --nav-bar-width: 220px;
+    --nav-bar-width: 12rem;
 
     --study-hover-color: #4e8144;
     --study-selected-color: #343837;
@@ -21,11 +21,4 @@
     --bs-body-bg: #1d1d1def;
     --bs-body-line-height: 1.0rem;
     --bs-body-font-size: 0.9rem;
-
-    --bs-table-bg: transparent;
-    --bs-table-accent-bg: transparent;
-    --bs-table-striped-color: #7aa879;
-    --bs-table-active-color: #77d375;
-    --bs-table-hover-color: #bddbbc;   
-
 }
