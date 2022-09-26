@@ -13,8 +13,10 @@ import xn from "./in.json";
 import hi from "./hi.json";
 import sw from "./sw.json";
 import zh from "./zh.json";
+import { localeConf } from "../globalConfigurations"
+
 const i18n = createI18n({
-  locale: "en",
+  locale: localeConf,
   messages: {
     en,
     es,
