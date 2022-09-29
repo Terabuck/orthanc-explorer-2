@@ -149,7 +149,7 @@ export default {
                 </li>
                 <li v-if="hasJobs" class="d-flex align-items-center">
                     <a href="#">
-                        <i class="fa fa-solid fa-bars-progress fa-lg menu-icon"></i>My jobs
+                        <i class="fa fa-solid fa-bars-progress fa-lg menu-icon"></i>{{$t('my_jobs')}}
                     </a><span class="ms-auto"></span>
                 </li>
 

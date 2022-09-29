@@ -512,8 +512,7 @@ export default {
             </StudyItem>
         </table>
         <div v-if="!isSearching && notShowingAllResults" class="alert alert-danger bottom-fixed-alert" role="alert">
-            <i class="bi bi-exclamation-triangle-fill"></i> Not showing all results. You should refine your search
-            criteria !
+            <i class="bi bi-exclamation-triangle-fill"></i> {{$t('not_showing_all_results')}} ! !
         </div>
         <div v-else-if="!isSearching && showEmptyStudyListIfNoSearch && this['studies/isFilterEmpty']"
             class="alert alert-warning bottom-fixed-alert" role="alert">

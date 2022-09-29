@@ -312,7 +312,7 @@ export default {
             </li>
             <li v-if="hasSendToPeersWithTransfer" class="dropdown-submenu">
                 <a class="dropdown-item" @click="toggleSubMenu" href="#">
-                    Advanced transfers
+                    {{$t('advanced_transfers')}}
                     <i class="bi bi-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu bg-dropdown">
@@ -325,7 +325,7 @@ export default {
             </li>
             <li v-if="hasSendToDicomWeb" class="dropdown-submenu">
                 <a class="dropdown-item" @click="toggleSubMenu" href="#">
-                    Dicom WEB
+                    {{$t('dicom_web')}}
                     <i class="bi bi-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu bg-dropdown">

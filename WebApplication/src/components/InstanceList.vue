@@ -49,7 +49,7 @@ export default {
                 class="instance-table-header cut-text"
                 data-bs-toggle="tooltip"
                 title="Instance Number"
-            >Instance Number</th>
+            >{{$t('instance_number')}}</th>
             <th
                 width="40%"
                 scope="col"
@@ -63,7 +63,7 @@ export default {
                 class="series-table-header cut-text text-center"
                 data-bs-toggle="tooltip"
                 title="Number of Frames"
-            ># frames</th>
+            ># {{$t('frames')}}</th>
         </thead>
         <InstanceItem
             v-for="instanceId in sortedInstancesIds"

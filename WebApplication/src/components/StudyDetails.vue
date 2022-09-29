@@ -36,8 +36,8 @@ export default {
                         {{$t('study_description')}}</ResourceDetailText>
                     <ResourceDetailText :value="studyMainDicomTags.AccessionNumber">{{$t('accession_number')}}
                     </ResourceDetailText>
-                    <!-- <ResourceDetailText :value="studyMainDicomTags.StudyID">Study ID</ResourceDetailText>
-                    <ResourceDetailText :value="studyMainDicomTags.StudyInstanceUID" :truncate="true">Study Instance UID</ResourceDetailText> -->
+                    <ResourceDetailText :value="studyMainDicomTags.StudyID">{{$t('study_id')}}</ResourceDetailText>
+                    <ResourceDetailText :value="studyMainDicomTags.StudyInstanceUID" :truncate="true">Study Instance UID</ResourceDetailText>
                     <ResourceDetailText :value="studyMainDicomTags.RequestingPhysician">{{$t('requesting_physician')}}
                     </ResourceDetailText>
                     <ResourceDetailText :value="studyMainDicomTags.ReferringPhysicianName">

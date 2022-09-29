@@ -43,7 +43,7 @@ export default {
         <thead>
             <th width="2%" scope="col" class="series-table-header"></th>
             <th width="7%" scope="col" class="series-table-header cut-text" data-bs-toggle="tooltip"
-                v-bind:title="`${$t('number_of_series')}`">{{$t('series')}}</th>
+                v-bind:title="`${$t('number_of_series')}`">{{$t('series_number')}}</th>
             <th width="40%" scope="col" class="series-table-header cut-text" data-bs-toggle="tooltip"
                 v-bind:title="`${$t('series_description')}`">{{$t('series_description')}}</th>
             <th width="11%" scope="col" class="series-table-header cut-text text-center" data-bs-toggle="tooltip"

@@ -567,8 +567,7 @@ export default {
             </RemoteStudyItem>
         </table>
         <!-- <div v-if="!isSearching && notShowingAllResults" class="alert alert-danger bottom-fixed-alert" role="alert">
-            <i class="bi bi-exclamation-triangle-fill"></i> Not showing all results. You should refine your search
-            criteria !
+            <i class="bi bi-exclamation-triangle-fill"></i> {{$t('not_showing_all_results')}} !
         </div> -->
         <div v-if="!isSearching && isFilterEmpty" class="alert alert-warning bottom-fixed-alert" role="alert">
             <i class="bi bi-exclamation-triangle-fill"></i> {{$t('enter_search')}}
@@ -577,7 +576,7 @@ export default {
             <i class="bi bi-exclamation-triangle-fill"></i> {{$t('no_result_found')}}
         </div>
         <div v-else-if="isSearching" class="alert alert-secondary bottom-fixed-alert" role="alert">
-             <span v-if="isSearching" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Searching !
+             <span v-if="isSearching" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> {{$t('searching')}} !
         </div>
     </div>
 </template>
