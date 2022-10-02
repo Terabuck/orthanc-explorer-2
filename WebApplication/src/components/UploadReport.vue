@@ -54,7 +54,7 @@ export default {
 <template>
     <div class="card border-secondary job-card">
         <div class="card-header jobs-header">
-            Upload {{ report.filesCount }} files
+            {{$t('upload')}} {{ report.filesCount }} {{$t('files')}}
             <button
                 type="button"
                 class="btn-close job-card-close"
@@ -84,7 +84,7 @@ export default {
                     type="button"
                     data-bs-toggle="modal"
                     v-bind:data-bs-target="'#upload-errors-modal-' + this.report.id"
-                >show errors</button>
+                >{{$t('show_errors')}}</button>
                 <Modal
                     :id="'upload-errors-modal-' + this.report.id"
                     :headerText="'Upload error report'"
@@ -95,8 +95,8 @@ export default {
                     <table class="table table-sm">
                         <thead>
                             <tr>
-                                <th width="50%">File</th>
-                                <th width="50%">Error</th>
+                                <th width="50%">{{$t('file')}}</th>
+                                <th width="50%">{{$t('error')}}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -112,7 +112,7 @@ export default {
         </div>
         <div class="card-body text-secondary jobs-body">
             <p class="card-text">
-                <span class="upload-details">Uploaded studies:</span>
+                <span class="upload-details">{{$t('uploaded_studies')}}:</span>
                 <br />
                 <span
                     v-for="(study, studyId) in report.uploadedStudies"
