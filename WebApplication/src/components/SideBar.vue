@@ -149,9 +149,9 @@ export default {
                     </a><span class="ms-auto"></span>
                 </li>
 
-                <li>
+                <div>
                     <Dropdown />
-                </li>
+                </div>
 
                 <div v-if="hasJobs" class="collapse show" id="jobs-list">
                     <JobsList />

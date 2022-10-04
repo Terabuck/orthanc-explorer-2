@@ -37,9 +37,7 @@ export default {
 </template>
 
 <style>
-.dropdown{
-    margin-top: var(--details-top-margin);
-}
+
 .dropdown-menu {
     margin-top: var(--details-top-margin);
     background-color: var(--study-selected-color);
