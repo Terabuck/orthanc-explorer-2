@@ -32,7 +32,9 @@ export default {
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-        <slot name="modalBody"></slot>
+        <slot name="modalBody">
+          <span v-html="bodyText"></span>
+        </slot>
         </div>
         <div class="modal-footer">
           <button

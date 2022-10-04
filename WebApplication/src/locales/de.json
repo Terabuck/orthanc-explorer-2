@@ -76,7 +76,8 @@
     "storage_compression": "Speicherkomprimierung",
     "storage_size": "Speichergröße",
     "striked_through": "durchgestrichen",
-    "studies": "studium",
+    "studies": "Studium",
+    "study": "Studien",
     "study_date": "Studiendatum",
     "study_description": "Studienbeschreibung",
     "study_id": "Studien-ID",
@@ -93,5 +94,5 @@
     "view_in_meddream": "In MedDream ansehen",
     "view_in_ohif ": "In OHIF ansehen",
     "view_in_osimis": "Im OsimisViewer anzeigen",
-    "view_in_stone": "Im StoneViewer anzeigen",
+    "view_in_stone": "Im StoneViewer anzeigen"
 }
