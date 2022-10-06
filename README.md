@@ -1,4 +1,4 @@
-# Orthanc Explorer 2 - Dark (green) mode - Localized (14 languages)
+# Orthanc Explorer 2 - Localized (14 languages)
 This is a fork from Orthanc plugin to implement Dark Mode on the new user interface for Orthanc to replace the Orthanc Explorer.
 
 ## Installation
