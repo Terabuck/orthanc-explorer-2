@@ -5,7 +5,7 @@ import JobsList from "./JobsList.vue";
 import { mapState } from "vuex"
 import { orthancApiUrl, oe2ApiUrl } from "../globalConfigurations";
 import api from "../orthancApi"
-
+import Dropdown from "./Dropdown.vue"
 export default {
     props: [],
     emits: [],
@@ -73,7 +73,7 @@ export default {
             }
     });
     },
-    components: { UploadHandler, JobsList },
+    components: { UploadHandler, JobsList, Dropdown },
 }
 </script>
 <template>
@@ -88,14 +88,14 @@ export default {
             <ul id="menu-content" class="menu-content collapse out">
                 <li class="d-flex align-items-center fix-router-link">
                     <router-link class="router-link" to="/">
-                        <i class="fa fa-x-ray fa-lg menu-icon"></i>Local studies
+                        <i class="fa fa-x-ray fa-lg menu-icon"></i>{{$t('local_studies')}}
                         <span class="study-count ms-auto">{{ displayedStudyCount }} / {{ statistics.CountStudies }}</span>
                     </router-link>
                 </li>
 
                 <li v-if="uiOptions.EnableUpload" class="d-flex align-items-center" data-bs-toggle="collapse"
                     data-bs-target="#upload-handler">
-                    <i class="fa fa-file-upload fa-lg menu-icon"></i>Upload
+                    <i class="fa fa-file-upload fa-lg menu-icon"></i>{{$t('upload')}}
                     <span class="ms-auto"></span>
                 </li>
                 <div v-if="uiOptions.EnableUpload" class="collapse" id="upload-handler">
@@ -134,20 +134,25 @@ export default {
 
                 <li v-if="hasAccessToSettings" class="d-flex align-items-center fix-router-link">
                     <router-link class="router-link" to="/settings">
-                        <i class="fa fa-cogs fa-lg menu-icon"></i>Settings
+                        <i class="fa fa-cogs fa-lg menu-icon"></i>{{$t('settings')}}
                     </router-link>
                 </li>
 
                 <li v-if="uiOptions.EnableLinkToLegacyUi" class="d-flex align-items-center fix-router-link">
                     <a v-bind:href="this.orthancApiUrl + 'app/explorer.html'">
-                        <i class="fa fa-solid fa-backward fa-lg menu-icon"></i>Legacy UI
+                        <i class="fa fa-solid fa-backward fa-lg menu-icon"></i>{{$t('legacy_ui')}}
                     </a><span class="ms-auto"></span>
                 </li>
                 <li v-if="hasJobs" class="d-flex align-items-center">
                     <a href="#">
-                        <i class="fa fa-solid fa-bars-progress fa-lg menu-icon"></i>My jobs
+                        <i class="fa fa-solid fa-bars-progress fa-lg menu-icon"></i>{{$t('my_jobs')}}
                     </a><span class="ms-auto"></span>
                 </li>
+
+                <div>
+                    <Dropdown />
+                </div>
+
                 <div v-if="hasJobs" class="collapse show" id="jobs-list">
                     <JobsList />
                 </div>

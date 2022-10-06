@@ -547,15 +547,15 @@ export default {
                             id="dropdown-modalities-button" aria-expanded="false"><span
                                 class="fa fa-list"></span>&nbsp;<span class="caret"></span></button>
                         <ul class="dropdown-menu" aria-labelledby="dropdown-modalities-button" @click="modalityFilterClicked" id="modality-filter-dropdown">
-                            <li><label class="dropdown-item"><input type="checkbox" data-value="all" @click="toggleModalityFilter" v-model="allModalities" />&nbsp;All</label></li>
-                            <li><label class="dropdown-item"><input type="checkbox" data-value="none" @click="toggleModalityFilter" v-model="noneModalities" />&nbsp;None</label></li>
+                            <li><label class="dropdown-item"><input type="checkbox" data-value="all" @click="toggleModalityFilter" v-model="allModalities" />&nbsp;{{$t('all')}}</label></li>
+                            <li><label class="dropdown-item"><input type="checkbox" data-value="none" @click="toggleModalityFilter" v-model="noneModalities" />&nbsp;{{$t('none')}}</label></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
                             <li v-for="modality in uiOptions.ModalitiesFilter" :key="modality">
                                 <label class="dropdown-item"><input type="checkbox" v-bind:data-value="modality" v-model="filterModalities[modality]" />&nbsp;{{modality}}</label>
                             </li>
-                            <li><button class="btn btn-primary mx-5" @click="closeModalityFilter" data-bs-toggle="dropdown">Close</button></li>
+                            <li><button class="btn btn-primary mx-5" @click="closeModalityFilter" data-bs-toggle="dropdown">{{$t('close')}}</button></li>
                         </ul>
                     </div>
                     <input v-if="columnTag == 'StudyDescription'" type="text" class="form-control study-list-filter"
@@ -566,17 +566,16 @@ export default {
             </RemoteStudyItem>
         </table>
         <!-- <div v-if="!isSearching && notShowingAllResults" class="alert alert-danger bottom-fixed-alert" role="alert">
-            <i class="bi bi-exclamation-triangle-fill"></i> Not showing all results. You should refine your search
-            criteria !
+            <i class="bi bi-exclamation-triangle-fill"></i> {{$t('not_showing_all_results')}} !
         </div> -->
         <div v-if="!isSearching && isFilterEmpty" class="alert alert-warning bottom-fixed-alert" role="alert">
-            <i class="bi bi-exclamation-triangle-fill"></i> Enter a search criteria to show results !
+            <i class="bi bi-exclamation-triangle-fill"></i> {{$t('enter_search')}}
         </div>
         <div v-else-if="!isSearching && isStudyListEmpty" class="alert alert-warning bottom-fixed-alert" role="alert">
-            <i class="bi bi-exclamation-triangle-fill"></i> No result found !
+            <i class="bi bi-exclamation-triangle-fill"></i> {{$t('no_result_found')}}
         </div>
         <div v-else-if="isSearching" class="alert alert-secondary bottom-fixed-alert" role="alert">
-             <span v-if="isSearching" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Searching !
+             <span v-if="isSearching" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> {{$t('searching')}} !
         </div>
     </div>
 </template>
