@@ -10,44 +10,44 @@ document._remoteStudyAllowedFilters = ["StudyDate", "StudyTime", "AccessionNumbe
 document._remoteStudyColumns = {
     "StudyDate": {
         "width": "7%",
-        "title": "study_date",
-        "tooltip": "study_date"
+        "title": "Study Date",
+        "tooltip": "Study Date"
     },
     "AccessionNumber": {
         "width": "11%",
-        "title": "accession_number",
-        "tooltip": "accession_number"
+        "title": "Accession Number",
+        "tooltip": "Accession Number"
     },
     "PatientID": {
         "width": "11%",
-        "title": "patient_id",
-        "tooltip": "patient_id"
+        "title": "Patient ID",
+        "tooltip": "Patient ID"
     },
     "PatientName": {
         "width": "15%",
-        "title": "patient_name",
-        "tooltip": "patient_name"
+        "title": "Patient Name",
+        "tooltip": "Patient Name"
     },
     "PatientBirthDate": {
         "width": "7%",
-        "title": "patient_birth_date",
-        "tooltip": "patient_birth_date"
+        "title": "Patient Birth Date",
+        "tooltip": "Patient Birth Date"
     },
     "StudyDescription": {
         "width": "25%",
-        "title": "description",
-        "tooltip": "study_description"
+        "title": "Description",
+        "tooltip": "Study Description"
     },
     "modalities": {
         "width": "6%",
-        "title": "modalities_in_study",
-        "tooltip": "modalities_in_study",
+        "title": "Modalities",
+        "tooltip": "Modalities in Study",
         "extraClasses": "text-center"
     },
     "seriesCount": {
         "width": "4%",
-        "title": "series",
-        "tooltip": "number_of_series",
+        "title": "# series",
+        "tooltip": "Number of Series",
         "extraClasses": "text-center"
     },
 }
