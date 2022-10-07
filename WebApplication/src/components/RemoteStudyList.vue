@@ -10,44 +10,44 @@ document._remoteStudyAllowedFilters = ["StudyDate", "StudyTime", "AccessionNumbe
 document._remoteStudyColumns = {
     "StudyDate": {
         "width": "7%",
-        "title": "Study Date",
-        "tooltip": "Study Date"
+        "title": "study_date",
+        "tooltip": "study_date"
     },
     "AccessionNumber": {
         "width": "11%",
-        "title": "Accession Number",
-        "tooltip": "Accession Number"
+        "title": "accession_number",
+        "tooltip": "accession_number"
     },
     "PatientID": {
         "width": "11%",
-        "title": "Patient ID",
-        "tooltip": "Patient ID"
+        "title": "patient_id",
+        "tooltip": "patient_id"
     },
     "PatientName": {
         "width": "15%",
-        "title": "Patient Name",
-        "tooltip": "Patient Name"
+        "title": "patient_name",
+        "tooltip": "patient_name"
     },
     "PatientBirthDate": {
         "width": "7%",
-        "title": "Patient Birth Date",
-        "tooltip": "Patient Birth Date"
+        "title": "patient_birth_date",
+        "tooltip": "patient_birth_date"
     },
     "StudyDescription": {
         "width": "25%",
-        "title": "Description",
-        "tooltip": "Study Description"
+        "title": "description",
+        "tooltip": "study_description"
     },
     "modalities": {
         "width": "6%",
-        "title": "Modalities",
-        "tooltip": "Modalities in Study",
+        "title": "modalities_in_study",
+        "tooltip": "modalities_in_study",
         "extraClasses": "text-center"
     },
     "seriesCount": {
         "width": "4%",
-        "title": "# series",
-        "tooltip": "Number of Series",
+        "title": "series",
+        "tooltip": "number_of_series",
         "extraClasses": "text-center"
     },
 }
@@ -509,9 +509,9 @@ export default {
                 <th width="2%" scope="col" class="study-table-header"></th>
                 <th width="5%" scope="col" class="study-table-header"></th>
                 <th v-for="columnTag in uiOptions.StudyListColumns" :key="columnTag" data-bs-toggle="tooltip"
-                    v-bind:title="columns[columnTag].tooltip" v-bind:width="columns[columnTag].width"
+                    v-bind:title="`${$t(`${columns[columnTag].tooltip}`)}`" v-bind:width="columns[columnTag].width"
                     v-bind:class="'study-table-header cut-text ' + columns[columnTag].extraClasses">{{
-                            columns[columnTag].title
+                    $t(`${columns[columnTag].title}`)
                     }}</th>
             </thead>
             <thead class="study-filter" v-on:keyup.enter="search">
