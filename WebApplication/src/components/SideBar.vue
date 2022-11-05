@@ -104,7 +104,7 @@ export default {
 
                 <li v-if="hasQueryableDicomModalities" class="d-flex align-items-center" data-bs-toggle="collapse"
                     data-bs-target="#modalities-list">
-                    <i class="fa fa-radiation fa-lg menu-icon"></i>DICOM Modalities
+                    <i class="fa fa-radiation fa-lg menu-icon"></i>{{$t('dicom_modalities')}}
                     <span class="arrow ms-auto"></span>
                 </li>
                 <ul class="sub-menu collapse" id="modalities-list" ref="modalities-collapsible">
@@ -123,7 +123,7 @@ export default {
 
                 <li v-if="hasQueryableDicomWebServers" class="d-flex align-items-center" data-bs-toggle="collapse"
                     data-bs-target="#dicomweb-servers-list">
-                    <i class="fa fa-globe fa-lg menu-icon"></i>DICOM-Web Servers
+                    <i class="fa fa-globe fa-lg menu-icon"></i>{{$t('dicom_web_servers')}}
                     <span class="arrow ms-auto"></span>
                 </li>
                 <ul class="sub-menu collapse" id="dicomweb-servers-list">
