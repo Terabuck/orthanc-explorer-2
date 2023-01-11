@@ -468,8 +468,9 @@ export default {
                     </button>
                 </th>
                 <th v-for="columnTag in uiOptions.StudyListColumns" :key="columnTag">
-                    <input v-if="columnTag == 'StudyDate'" type="text" class="form-control study-list-filter"
-                        v-model="filterStudyDate" placeholder="20220130" v-bind:class="getFilterClass('StudyDate')"/>
+                    <Datepicker v-if="columnTag == 'StudyDate'" v-model="filterStudyDate" v-bind:class="getFilterClass('StudyDate')" 
+                    :enable-time-picker="false" model-type="yyyyMMdd" text-input auto-apply :clearable="false" :highlight-week-days="[0, 6]" 
+                    show-now-button now-button-label="HOY" locale="es" position="right" arrow-navigation />
                     <input v-if="columnTag == 'AccessionNumber'" type="text" class="form-control study-list-filter"
                         v-model="filterAccessionNumber" placeholder="1234" v-bind:class="getFilterClass('AccessionNumber')"/>
                     <input v-if="columnTag == 'PatientID'" type="text" class="form-control study-list-filter"
