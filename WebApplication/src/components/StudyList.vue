@@ -619,7 +619,7 @@ export default {
                     </button>
                 </th>
                 <th v-for="columnTag in uiOptions.StudyListColumns" :key="columnTag">
-                    <Datepicker v-if="columnTag == 'StudyDate'" v-model="filterStudyDateForDatePicker"
+                    <Datepicker v-if="columnTag == 'StudyDate'" v-model="filterStudyDateForDatePicker" dark
                         :enable-time-picker="false" range :preset-ranges="datePickerPresetRanges" format="yyyyMMdd"
                         preview-format="yyyyMMdd" text-input arrow-navigation :highlight-week-days="[0, 6]">
                         <template #yearly="{ label, range, presetDateRange }">
@@ -633,7 +633,7 @@ export default {
                         v-model="filterPatientID" placeholder="1234" v-bind:class="getFilterClass('PatientID')" />
                     <input v-if="columnTag == 'PatientName'" type="text" class="form-control study-list-filter"
                         v-model="filterPatientName" placeholder="John^Doe" v-bind:class="getFilterClass('PatientName')" />
-                    <Datepicker v-if="columnTag == 'PatientBirthDate'" v-model="filterPatientBirthDateForDatePicker"
+                    <Datepicker v-if="columnTag == 'PatientBirthDate'" v-model="filterPatientBirthDateForDatePicker" dark
                         :enable-time-picker="false" range format="yyyyMMdd" preview-format="yyyyMMdd" text-input
                         arrow-navigation :highlight-week-days="[0, 6]">
                     </Datepicker>
@@ -741,10 +741,40 @@ input.form-control.study-list-filter {
     margin-bottom: var(--filter-margin);
     padding-top: var(--filter-padding);
     padding-bottom: var(--filter-padding);
+    padding-left: 0px;
+    background: var(--field-bg-color);
+}
+
+.btn {
+    color: var(--nav-side-color);
+    --bs-btn-padding-x: 0.5rem;
+    --bs-btn-padding-y: 0.2375rem 0.5rem 0.075rem;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    border-color: var(--nav-side-color);
+    padding: 0.25rem 0.5rem 0.1rem;
+}
+
+button,
+select {
+    text-transform: none;
+    color: var(--nav-side-color);
+}
+
+tbody,
+td,
+tfoot,
+th,
+thead,
+tr {
+    border-style: hidden;
+    color: var(--nav-side-color);
 }
 
 .filter-button {
-    border: 1px solid #ced4da;
+    /* border: 1px solid #ced4da; */
 }
 
 .search-button {
@@ -752,8 +782,8 @@ input.form-control.study-list-filter {
 }
 
 .is-not-searching {
-    background-color: #0d6dfd86 !important;
-    border-color: #0d6dfd86 !important;
+    background-color: #399637 !important;
+    border-color: #399637 !important;
 }
 
 .is-searching {
@@ -762,7 +792,7 @@ input.form-control.study-list-filter {
 }
 
 input.form-control.study-list-filter:not(:placeholder-shown) {
-    background-color: white;
+    background-color: var(--nav-side-color);
 }
 
 input.form-control.study-list-filter::placeholder {
@@ -770,7 +800,7 @@ input.form-control.study-list-filter::placeholder {
 }
 
 button.form-control.study-list-filter {
-    color: black;
+    color: #99d598;
     margin-top: var(--filter-margin);
     margin-bottom: var(--filter-margin);
     padding-top: var(--filter-padding);
@@ -779,54 +809,148 @@ button.form-control.study-list-filter {
 
 .study-table-header {
     text-align: left;
-    padding-left: 10px;
-}
-
-.study-table-title {
-    text-align: left;
     padding-left: 4px;
-    padding-right: 4px;
-    vertical-align: middle;
-    line-height: 1.2rem;
+    color: #89bdac;
 }
 
 .study-table> :not(:first-child) {
     border-top: 0px !important;
+    color: #89bdac;
+}
+
+.study-table> :nth-child(odd)>* {
+    background-color: var(--bs-table-bg);
+}
+
+.study-table> :not(caption)>*>* {
+    padding: 0.35rem;
+    border-width: 1px 0px 1px 0px;
+    border-bottom-color: var(--study-selected-color);
+    border-top-color: var(--bs-table-bg);
 }
 
 .study-filter th {
     text-align: left;
-    padding-left: 10px;
-    background-color: rgb(240, 240, 240);
+    padding-left: 4px;
+    background-color: #3e4a42;
     padding-top: 0px;
     padding-bottom: 0px;
 }
 
 .study-table td {
     text-align: left;
-    padding-left: 10px;
+    padding-left: 4px;
 }
 
-.study-list-alert {
-    padding-top: 4px !important;
-    padding-bottom: 4px !important;
-    margin-top: 1px !important;
-    margin-bottom: 1px !important;
+.bottom-fixed-alert {
+    position: fixed !important;
+    bottom: 0px;
+    width: 100%;
+    font-size: large;
+    font-weight: 600;
+    text-align: left;
+    padding-left: 50px !important;
 }
 
 .is-invalid-filter {
     /* background-color: #f7dddf !important; */
     border-color: red !important;
-    box-shadow: 0 0 0 .25rem rgba(255, 0, 0, .25) !important;
+    box-shadow: 0 0 0 0.25rem rgba(255, 0, 0, 0.25) !important;
 }
+
+.dropdown-menu {
+
+    --bs-dropdown-bg: #3e4a42;
+}
+
+.dropdown-item {
+    color: var(--nav-side-color);
+}
+
+.alert {
+    --bs-alert-padding-x: 6px;
+    --bs-alert-padding-y: 6px;
+    --bs-alert-margin-bottom: 6px;
+}
+
+
+.dp-custom-input {
+  box-shadow: 0 0 6px #54d219;
+  border: 1px solid var(--nav-side-color);
+    border-radius: 7px;
+ }
+
+
+.dp-custom-menu {
+  box-shadow: 0 0 6px #225e1a;
+}
+
+.dp-custom-calendar {
+    border: 1px solid var(--nav-side-color);
+    border-radius: 7px;
+}
+
+
+
+.dp__now_wrap {
+    background-color: var(--instance-selected-color);
+    color: var(--study-selected-color);
+}
+
+.dp__now_button {
+    border: 1px solid #4caf50;
+    color: #4caf50;
+}
+
+
+.dp__month_year_select  {
+    background-color: var(--study-selected-color);
+}
+.dp__month_year_row  {
+    background-color: var(--study-selected-color);
+}
+
+.dp__calendar_wrap {
+    background-color: var(--study-selected-color);
+}
+
+.dp__cell_inner {
+    background-color: var(--study-selected-color);
+}
+.dp__pointer {
+    background-color: var(--study-selected-color);
+}
+.dp__cell_highlight {
+    background-color: var(--study-selected-color);
+}
+
+.dp__date_hover {
+    background-color: var(--study-selected-color);
+}
+  
+.dp__calendar_header_item {
+    background-color: var(--study-selected-color);
+}
+
 
 .alert-icon {
     margin-right: 0.7rem;
 }
+
+.alert-secondary {
+    --bs-alert-color: #000;
+    --bs-alert-bg: #a97221;
+    --bs-alert-border-color: #000;
+}   
 
 .actions-header {
     background-color: rgb(240, 240, 240);
     text-align: left;
     vertical-align: middle;
     padding-left: 10px;
-}</style>
+}
+
+.form-check-input {
+    background-color: #4f5f54;
+}
+</style>

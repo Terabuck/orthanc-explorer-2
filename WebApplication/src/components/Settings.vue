@@ -129,11 +129,16 @@ export default {
     </div>
 </template>
 <style scoped>
+.btn-primary {
+    --bs-btn-bg: #343837;
+    --bs-btn-border-color: #778f89;
+}
 
 h5 {
-    margin-top: 50px;
+    margin-top: 25px;
     margin-bottom: 15px;
-    margin-left: 50px;
+    margin-left: 8px;
+    color: aquamarine;
 }
 
 .settings {
@@ -151,6 +156,10 @@ h5 {
 }
 .header {
     padding-left: 15px;
+}
+
+.m-2 {
+    color: #d0e2d0;
 }
 
 .value {

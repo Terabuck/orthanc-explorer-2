@@ -41,5 +41,19 @@ export default {
 </template>
 
 <style>
+.modal {
+    --bs-modal-color: var(--nav-side-color);
+    --bs-modal-bg: var(--nav-side-hover-bg-color);
+}
+.btn-primary {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: #343837;
+    --bs-btn-border-color: var(--nav-side-color);
+}
+.form-control {
+    background-color: var(--field-bg-color);
+    color: #9ead97;
+    line-height: 1;
+}
 
 </style>

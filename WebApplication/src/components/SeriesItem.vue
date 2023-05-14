@@ -101,10 +101,11 @@ export default {
 
 <style scoped>
 .series-row-collapsed {
+background-color: var(--instance-selected-color);    
 }
 
 .series-row-expanded {
-    background-color: var(--series-selected-color);
+    background-color: var(--series-expanded-color);
     font-weight: 700;
 
     border-top: 2px !important;
@@ -121,13 +122,13 @@ export default {
 }
 
 .series-table > tbody > tr.series-row-expanded:hover {
-    background-color: var(--series-selected-color);
+    background-color: var(--series-expanded-color);
 }
 .series-table > tbody > tr.series-details-expanded:hover {
-    background-color: var(--series-selected-color);
+    background-color: var(--series-expanded-color);
 }
 .series-details-expanded {
-    background-color: var(--series-selected-color);
+    background-color: var(--series-expanded-color);
 
     border-top: 0px !important;
     border-bottom: 2px !important;

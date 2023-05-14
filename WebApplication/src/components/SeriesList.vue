@@ -98,26 +98,38 @@ export default {
     </table>
 </template>
 
-<style>
 
-.series-table>:not(:first-child) {
+<style>
+.series-table> :not(:first-child) {
     border-top: 0px !important;
+    color: #acdbcc;
 }
 
-.series-table>:first-child {
+.series-table> :first-child {
     border-bottom: 2px !important;
     border-style: solid !important;
     border-color: black !important;
+    color: #89bdac;
+}
+
+.series-table> :nth-child(odd)>* {
+    background-color: var(--series-selected-color);
+}
+
+.table> :not(caption)>*>* {
+    padding: 0.35rem;
+    border-width: 1px 0px 1px 0px;
+    background-color: var(--bs-table-bg);
 }
 
 .series-table-header {
     text-align: left;
     padding-left: 10px;
+    padding-top: 6px;
 }
 
 .series-table td {
     text-align: left;
     padding-left: 10px;
 }
-
 </style>

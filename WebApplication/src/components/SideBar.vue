@@ -103,7 +103,7 @@ export default {
 <template>
     <div class="nav-side-menu">
         <div>
-            <img class="orthanc-logo" src="..//assets/images/orthanc.png" height="48" />
+            <img class="orthanc-logo" src="..//assets/images/orthanc.png" height="32" />
         </div>
         <div v-if="uiOptions.ShowOrthancName" class="orthanc-name">
             <p>{{ system.Name }}</p>
@@ -198,21 +198,20 @@ export default {
                 </div>
             </ul>
         </div>
-        <div class="bottom-side-bar">
+        <div class="language-picker">
             <LanguagePicker />
         </div>
     </div>
 </template>
 <style scoped>
+
 .router-link {
     width: 100%;
     text-align: left;
 }
-
 .fix-router-link {
     margin-left: -20px !important;
 }
-
 .echo-status {
     font-size: 17px;
 }
@@ -235,20 +234,19 @@ export default {
 
 .nav-side-menu {
     font-family: verdana;
-    font-size: 12px;
-    font-weight: 200;
+    font-size: 1.5rem;
+    font-weight: 500;
     background-color: var(--nav-side-bg-color);
     color: var(--nav-side-color);
-    height: 100%;
 }
 
 
 .nav-side-menu ul,
 .nav-side-menu li {
     list-style: none;
-    padding: 0px;
+    padding: 10px 0px;
     margin: 0px;
-    line-height: 35px;
+    line-height: 25px;
     cursor: pointer;
 }
 
@@ -268,7 +266,6 @@ export default {
     padding-right: 0px;
     float: right;
 }
-
 .nav-side-menu ul .active,
 .nav-side-menu li .active {
     border-left: 3px solid #d19b3d;
@@ -306,7 +303,7 @@ export default {
 .nav-side-menu li .sub-menu li:before {
     font-family: "Font Awesome\ 5 Free";
     font-weight: 900;
-    content: " ";
+    content: "\f105";
     display: inline-block;
     padding-left: 20px;
     padding-right: 20px;
@@ -339,7 +336,6 @@ export default {
 .nav-side-menu .menu-list .menu-content {
     display: block;
 }
-
 .nav-side-menu .menu-list .menu-content {
     display: block;
 }
@@ -347,7 +343,7 @@ export default {
 .menu-list {
     margin-left: 10px;
     margin-right: 10px;
-    font-size: 14px;
+    font-size: 1rem;
 }
 
 .menu-icon {
@@ -355,7 +351,7 @@ export default {
     margin-right: 10px;
 }
 
-.bottom-side-bar {
+.language-picker {
     position: absolute;
     bottom: 1rem;
     width: 100%;

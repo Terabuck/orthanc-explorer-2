@@ -89,9 +89,11 @@ export default {
     </tbody>
 </template>
 
+
 <style scoped>
 
 .instance-row-collapsed {
+    background-color: var(--series-selected-color);
 }
 
 .instance-row-expanded {

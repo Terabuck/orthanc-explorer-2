@@ -121,5 +121,6 @@ export default {
     margin-top: var(--details-top-margin);
     font-size: 0.9rem;
     --bs-dropdown-item-padding-y: 0.05rem;
+    --bs-dropdown-bg: #343837!important;
 }
 </style>

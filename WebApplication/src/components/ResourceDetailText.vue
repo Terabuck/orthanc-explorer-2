@@ -50,10 +50,12 @@ export default {
 
 </template>
 
+
 <style>
 .details-label {
     font-weight: 700;
     max-width: 30%;
+    color: #89bdac;
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -62,6 +64,7 @@ export default {
     margin-left: auto !important;
     font-weight: 500;
     max-width: 25vw;
+    color: #89bdac;
     overflow: hidden;
     text-overflow: ellipsis;
 }

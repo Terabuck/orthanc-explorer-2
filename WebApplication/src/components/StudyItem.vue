@@ -134,7 +134,9 @@ export default {
 </template>
 
 <style scoped>
-.study-row-collapsed {}
+.study-row-collapsed {
+    background-color: var(--study-selected-color);
+}
 
 .study-row-expanded {
     background-color: var(--study-selected-color);

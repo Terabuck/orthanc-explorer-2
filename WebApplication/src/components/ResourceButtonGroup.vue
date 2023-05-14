@@ -521,7 +521,7 @@ export default {
 
 <style>
 .bg-dropdown {
-    background-color: rgb(220, 220, 220);
+    background-color: #4f8767;
 }
 
 .dropdown-submenu {

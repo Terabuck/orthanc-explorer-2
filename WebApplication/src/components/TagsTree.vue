@@ -42,11 +42,13 @@ export default {
     </ul>
 </template>
 
+
 <style scoped>
 
 .details-label {
     font-weight: 700;
     max-width: 30%;
+    color: #89bdac;
     /* overflow: hidden;
     text-overflow: ellipsis; */
 }
@@ -54,6 +56,7 @@ export default {
 .details {
     margin-left: auto !important;
     font-weight: 500;
+    color: #89bdac;
     /* overflow: hidden;
     text-overflow: ellipsis; */
 }
