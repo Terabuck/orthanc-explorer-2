@@ -143,8 +143,8 @@ export default {
 </template>
 
 <style scoped>
-.study-row-collapsed {
-    background-color: var(--bs-gray-800);
+study-row-collapsed {
+    background-color: var(--series-expanded-color);
 }
 
 .study-row-expanded {

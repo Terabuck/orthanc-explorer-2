@@ -160,7 +160,7 @@ export default {
                     }
                 }
                 catch (error) {
-                    console.error('uploadFiles', err);
+                    console.error('uploadFiles', error);
                     let errorMessage = "error " + error.response.status;
                     if (error.response.status >= 400 && error.response.status < 500) {
                         errorMessage = error.response.data.Message;
@@ -260,9 +260,9 @@ export default {
 }
 
 .upload-handler-drop-zone {
-    border-color: #93b58f;
-    border-style: dashed;
+    border-color: var(--nav-side-color);
+    background-color: var(--bs-body-bg);
+    border-style: solid;
     border-width: 1px
 }
-
 </style>

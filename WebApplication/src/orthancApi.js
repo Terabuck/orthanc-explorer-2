@@ -74,19 +74,25 @@ export default {
             window.axiosFindStudiesAbortController = null;
         }
     },
-    async findStudies(filterQuery) {
+    async findStudies(filterQuery, labels, LabelsConstraint) {
         await this.cancelFindStudies();
         window.axiosFindStudiesAbortController = new AbortController();
 
-        return (await axios.post(orthancApiUrl + "tools/find", {
-                "Level": "Study",
-                "Limit": store.state.configuration.uiOptions.MaxStudiesDisplayed,
-                "Query": filterQuery,
-                "RequestedTags": [
-                    "ModalitiesInStudy"
-                ],
-                "Expand": true
-            }, 
+        let payload = {
+            "Level": "Study",
+            "Limit": store.state.configuration.uiOptions.MaxStudiesDisplayed,
+            "Query": filterQuery,
+            "RequestedTags": [
+                "ModalitiesInStudy"
+            ],
+            "Expand": true
+        };
+        if (labels && labels.length > 0) {
+            payload["Labels"] = labels;
+            payload["LabelsConstrint"] = LabelsConstraint;
+        }
+
+        return (await axios.post(orthancApiUrl + "tools/find", payload, 
             {
                 signal: window.axiosFindStudiesAbortController.signal
             })).data;
@@ -219,6 +225,9 @@ export default {
     async getInstanceTags(orthancId) {
         return (await axios.get(orthancApiUrl + "instances/" + orthancId + "/tags")).data;
     },
+    async getSimplifiedInstanceTags(orthancId) {
+        return (await axios.get(orthancApiUrl + "instances/" + orthancId + "/tags?simplify")).data;
+    },
     async getInstanceHeader(orthancId) {
         return (await axios.get(orthancApiUrl + "instances/" + orthancId + "/header")).data;
     },
@@ -260,6 +269,62 @@ export default {
 
         return response.data['ID'];
     },
+
+    async loadAllLabels() {
+        const response = (await axios.get(orthancApiUrl + "tools/labels"));
+        return response.data;
+    },
+
+    async addLabel({studyId, label}) {
+        await axios.put(orthancApiUrl + "studies/" + studyId + "/labels/" + label, "");
+        return label;
+    },
+
+    async removeLabel({studyId, label}) {
+        await axios.delete(orthancApiUrl + "studies/" + studyId + "/labels/" + label);
+        return label;
+    },
+
+    async removeAllLabels(studyId) {
+        const labels = await this.getLabels(studyId);
+        let promises = [];
+        for (let label of labels) {
+            promises.push(this.removeLabel({
+                studyId: studyId,
+                label: label
+            }));
+        }
+        await Promise.all(promises);
+        return labels;
+    },
+
+    async getLabels(studyId) {
+        const response = (await axios.get(orthancApiUrl + "studies/" + studyId + "/labels"));
+        return response.data;
+    },
+
+    async updateLabels({studyId, labels}) {
+        const currentLabels = await this.getLabels(studyId);
+        const labelsToRemove = currentLabels.filter(x => !labels.includes(x));
+        const labelsToAdd = labels.filter(x => !currentLabels.includes(x));
+        // console.log("labelsToRemove: ", labelsToRemove);
+        // console.log("labelsToAdd: ", labelsToAdd);
+        for (const label of labelsToRemove) {
+            this.removeLabel({
+                studyId: studyId,
+                label: label
+            })
+        }
+        for (const label of labelsToAdd) {
+            this.addLabel({
+                studyId: studyId,
+                label: label
+            })
+        }
+        return labelsToAdd.length > 0 || labelsToRemove.length > 0;
+    },
+
+
 
     async createToken({tokenType, resourcesIds, level, validityDuration=null, id=null, expirationDate=null}) {
         let body = {
@@ -311,21 +376,45 @@ export default {
         return orthancApiUrl + 'stone-webviewer/index.html?' + level + '=' + resourceDicomUid;
     },
     getVolViewUrl(level, resourceOrthancId) {
-        return orthancApiUrl + 'volview/index.html?urls=[../' + this.pluralizeResourceLevel(level) + '/' + resourceOrthancId + '/archive]';
+        const volViewVersion = store.state.configuration.installedPlugins.volview.Version;
+        const urls = 'urls=[../' + this.pluralizeResourceLevel(level) + '/' + resourceOrthancId + '/archive]';
+        if (volViewVersion == '1.0') {
+            return orthancApiUrl + 'volview/index.html?' + urls;
+        } else {
+            return orthancApiUrl + 'volview/index.html?names=[archive.zip]&' + urls;
+        }
+    },
+    getWsiViewerUrl(seriesOrthancId) {
+        return orthancApiUrl + 'wsi/app/viewer.html?series=' + seriesOrthancId;
     },
     getStoneViewerUrlForBulkStudies(studiesDicomIds) {
         return orthancApiUrl + 'stone-webviewer/index.html?study=' + studiesDicomIds.join(",");
     },
-    getOhifViewerUrl(level, resourceDicomUid) {
+    getOhifViewerUrlForDicomJson(mode, resourceOrthancId) {
+        if (mode == 'basic') {
+            return store.state.configuration.uiOptions.OhifViewer3PublicRoot + 'viewer?url=../studies/' + resourceOrthancId + "/ohif-dicom-json";
+        } else if (mode == 'vr') {
+            return store.state.configuration.uiOptions.OhifViewer3PublicRoot + 'viewer?hangingprotocolId=mprAnd3DVolumeViewport&url=../studies/' + resourceOrthancId + "/ohif-dicom-json";
+        } else if (mode == 'tmtv') {
+            return store.state.configuration.uiOptions.OhifViewer3PublicRoot + 'tmtv?url=../studies/' + resourceOrthancId + "/ohif-dicom-json";
+        }
+    },
+    getOhifViewerUrlForDicomWeb(mode, resourceDicomUid) {
         if (store.state.configuration.uiOptions.EnableOpenInOhifViewer3) {
-            return store.state.configuration.uiOptions.OhifViewer3PublicRoot + 'viewer?StudyInstanceUIDs=' + resourceDicomUid;    
+            if (mode == 'basic') {
+                return store.state.configuration.uiOptions.OhifViewer3PublicRoot + 'viewer?StudyInstanceUIDs=' + resourceDicomUid;
+            } else if (mode == 'vr') {
+                return store.state.configuration.uiOptions.OhifViewer3PublicRoot + 'viewer?hangingprotocolId=mprAnd3DVolumeViewport&StudyInstanceUIDs=' + resourceDicomUid;
+            } else if (mode == 'tmtv') {
+                return store.state.configuration.uiOptions.OhifViewer3PublicRoot + 'tmtv?StudyInstanceUIDs=' + resourceDicomUid;
+            }
         } else {
             return store.state.configuration.uiOptions.OhifViewerPublicRoot + 'Viewer/' + resourceDicomUid;
         }
     },
-    getOhifViewerUrlForBulkStudies(studiesDicomIds) {
+    getOhifViewerUrlForDicomWebBulkStudies(mode, studiesDicomIds) {
         if (store.state.configuration.uiOptions.EnableOpenInOhifViewer3) {
-            return store.state.configuration.uiOptions.OhifViewer3PublicRoot + 'viewer?StudyInstanceUIDs=' + studiesDicomIds.join(",");
+            return this.getOhifViewerUrlForDicomWeb(mode, studiesDicomIds.join(","));
         } else {
             return null;
         }

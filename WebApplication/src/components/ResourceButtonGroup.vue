@@ -8,7 +8,7 @@ import api from "../orthancApi"
 import resourceHelpers from "../helpers/resource-helpers"
 import clipboardHelpers from "../helpers/clipboard-helpers"
 import TokenLinkButton from "./TokenLinkButton.vue"
-
+import BulkLabelsModal from "./BulkLabelsModal.vue"
 
 export default {
     props: ["resourceOrthancId", "resourceDicomUid", "resourceLevel", "customClass", "seriesMainDicomTags", "studyMainDicomTags", "patientMainDicomTags", "instanceTags"],
@@ -19,10 +19,16 @@ export default {
 
     data() {
         return {
-            isDeleteModalVisible: false
+            isBulkLabelModalVisible: false,
+            isWsiButtonEnabled: false
         };
     },
-    mounted() {
+    async mounted() {
+        if (this.resourceLevel == 'series') {
+            let seriesInstances = await api.getSeriesInstances(this.resourceOrthancId);
+            let firstInstancetags = await api.getSimplifiedInstanceTags(seriesInstances[0]['ID']);
+            this.isWsiButtonEnabled = firstInstancetags["SOPClassUID"] == "1.2.840.10008.5.1.4.1.1.77.1.6";
+        }
     },
     methods: {
         toggleSubMenu(event) {
@@ -95,19 +101,53 @@ export default {
                         return viewersIcons[viewer];
                     }
 
+                    if (this.hasOhifViewer && forViewer == "ohif-vr") {
+                        return viewersIcons[viewer];
+                    }
+
+                    if (this.hasOhifViewer && forViewer == "ohif-tmtv") {
+                        return viewersIcons[viewer];
+                    }
+
                     if (this.hasMedDreamViewer && forViewer == "meddream") {
                         return viewersIcons[viewer];
                     }
                 }
             }
             return "bi bi-eye";
-        }
+        },
+        showBulkLabelModal() {
+            // this modal is re-created everytime we open it (to interface correctly with bootstrap5-tags
+            this.isBulkLabelModalVisible = true;
+            // wait that the DOM element is created !
+            setTimeout(() => {
+                this.$refs['bulk-label-modal'].showModal();
+            }, 50);
+        },
+        async onBulkModalClosed() {
+            this.isBulkLabelModalVisible = false;
+            await this.$store.dispatch('labels/refresh');
+        },
+        getOhifViewerUrl(mode) {
+            if (this.resourceLevel == 'bulk') {
+                const selectedStudiesDicomIds = this.selectedStudies.map(s => s['MainDicomTags']['StudyInstanceUID']);
+                const url = api.getOhifViewerUrlForDicomWebBulkStudies(mode, selectedStudiesDicomIds);
+                return url;
+            } else {
+                if (this.ohifDataSource == 'dicom-web') {
+                    return api.getOhifViewerUrlForDicomWeb(mode, this.resourceDicomUid);
+                } else if (this.ohifDataSource == 'dicom-json') {
+                    return api.getOhifViewerUrlForDicomJson(mode, this.resourceOrthancId);
+                }
+            }
+        },
     },
     watch: {
     },
     computed: {
         ...mapState({
             uiOptions: state => state.configuration.uiOptions,
+            ohifDataSource: state => state.configuration.ohifDataSource,
             installedPlugins: state => state.configuration.installedPlugins,
             targetDicomWebServers: state => state.configuration.targetDicomWebServers,
             targetDicomModalities: state => state.configuration.targetDicomModalities,
@@ -116,6 +156,13 @@ export default {
             orthancPeers: state => state.configuration.orthancPeers,
             tokens: state => state.configuration.tokens
         }),
+        componentId() {
+            if (this.resourceLevel == 'bulk') {
+                return 'bulk-id';
+            } else {
+                return this.resourceOrthancId;
+            }
+        },
         hasSendTo() {
             return this.uiOptions.EnableSendTo &&
                 (this.hasSendToDicomWeb || this.hasSendToPeers || this.hasSendToDicomModalities || this.hasSendToPeersWithTransfer);
@@ -127,13 +174,32 @@ export default {
                 return true;
             }
         },
+        hasLabelsButton() {
+            return this.uiOptions.EnableEditLabels && this.resourceLevel == 'bulk';
+        },
+        isLabelsEnabled() {
+            if (this.resourceLevel == 'bulk') {
+                return this.selectedStudiesIds.length > 0
+            } else {
+                return false;
+            }
+        },
         isDeleteEnabled() {
             if (this.resourceLevel == 'bulk') {
                 return this.selectedStudiesIds.length > 0
             } else {
                 return true;
             }
-        },     
+        },
+        hasWsiButton() {
+            if (this.resourceLevel != 'series' || !("wsi" in this.installedPlugins)) {
+                return false;
+            }
+            return true;
+        },
+        wsiViewerUrl() {
+            return api.getWsiViewerUrl(this.resourceOrthancId);
+        },
         hasSendToPeers() {
             return this.orthancPeers.length > 0;
         },
@@ -186,31 +252,54 @@ export default {
             return this.uiOptions.EnableOpenInOhifViewer || this.uiOptions.EnableOpenInOhifViewer3;
         },
         hasOhifViewerButton() {
-            if (this.tokens.RequiredForLinks) {
-                // OHIF is not available when using user permissions:
-                // https://community.ohif.org/t/ohif-orthanc-token-to-access-a-single-study/727
-                return false;
-            }
             if (this.uiOptions.EnableOpenInOhifViewer3) {
-                return this.hasOhifViewer && (this.resourceLevel == 'study' || this.resourceLevel == 'bulk');
+                return this.hasOhifViewer && (this.resourceLevel == 'study' || (this.resourceLevel == 'bulk' && this.ohifDataSource == 'dicom-web'));
             } else {
                 return this.hasOhifViewer && this.resourceLevel == 'study';
             }
         },
-        ohifViewerUrl() {
-            if (this.resourceLevel == 'bulk') {
-                const selectedStudiesDicomIds = this.selectedStudies.map(s => s['MainDicomTags']['StudyInstanceUID']);
-                const url = api.getOhifViewerUrlForBulkStudies(selectedStudiesDicomIds);
-                return url;
+        hasOhifViewerButtonVr() {
+            if (this.uiOptions.EnableOpenInOhifViewer3) {
+                return this.hasOhifViewer && (this.resourceLevel == 'study' || (this.resourceLevel == 'bulk' && this.ohifDataSource == 'dicom-web'));
             } else {
-                return api.getOhifViewerUrl(this.resourceLevel, this.resourceDicomUid);
+                return false;
             }
         },
-        isOhifButtonEnabled() {
+        hasOhifViewerButtonTmtv() {
             if (this.uiOptions.EnableOpenInOhifViewer3) {
-                return (this.resourceLevel == 'study' || (this.resourceLevel == 'bulk' && this.selectedStudiesIds.length > 0));
+                return this.hasOhifViewer && (this.resourceLevel == 'study');
             } else {
+                return false;
+            }
+        },
+        ohifViewerUrl() {
+            return this.getOhifViewerUrl('basic');
+        },
+        ohifViewerUrlVr() {
+            return this.getOhifViewerUrl('vr');
+        },
+        ohifViewerUrlTmtv() {
+            return this.getOhifViewerUrl('tmtv');
+        },
+        isOhifButtonEnabled() {
+            if (this.uiOptions.EnableOpenInOhifViewer3) { // OHIF V3
+                return (this.resourceLevel == 'study' || (this.resourceLevel == 'bulk' && this.selectedStudiesIds.length > 0));
+            } else { // OHIF V2
                 return this.resourceLevel == 'study';
+            }
+        },
+        isOhifButtonVrEnabled() {
+            if (this.uiOptions.EnableOpenInOhifViewer3) { // OHIF V3
+                return (this.resourceLevel == 'study' || (this.resourceLevel == 'bulk' && this.selectedStudiesIds.length > 0));
+            } else { // OHIF V2
+                return false;
+            }
+        },
+        isOhifButtonTmtvEnabled() {
+            if (this.uiOptions.EnableOpenInOhifViewer3) { // OHIF V3
+                return (this.resourceLevel == 'study');
+            } else { // OHIF V2
+                return false;
             }
         },
         hasMedDreamViewer() {
@@ -254,6 +343,12 @@ export default {
         },
         ohifViewerIcon() {
             return this.getViewerIcon("ohif");
+        },
+        ohifViewerIconVr() {
+            return this.getViewerIcon("ohif-vr");
+        },
+        ohifViewerIconTmtv() {
+            return this.getViewerIcon("ohif-tmtv");
         },
         deleteResourceTitle() {
             const texts = {
@@ -310,7 +405,7 @@ export default {
             }
         }
     },
-    components: { Modal, ShareModal, ModifyModal, TokenLinkButton }
+    components: { Modal, ShareModal, ModifyModal, TokenLinkButton, BulkLabelsModal }
 }
 </script>
 
@@ -352,11 +447,32 @@ export default {
                     :resourcesOrthancId="resourcesOrthancId" :title="$t('view_in_ohif')"
                     :tokenType="'viewer-instant-link'" :opensInNewTab="true">
                 </TokenLinkButton>
+
+                <TokenLinkButton v-if="viewer == 'ohif-vr' && hasOhifViewerButtonVr"
+                    :disabled="!isOhifButtonVrEnabled"
+                    :iconClass="ohifViewerIconVr" :level="computedResourceLevel" :linkUrl="ohifViewerUrlVr"
+                    :resourcesOrthancId="resourcesOrthancId" :title="$t('view_in_ohif_vr')"
+                    :tokenType="'viewer-instant-link'" :opensInNewTab="true">
+                </TokenLinkButton>
+
+                <TokenLinkButton v-if="viewer == 'ohif-tmtv' && hasOhifViewerButtonTmtv"
+                    :disabled="!isOhifButtonTmtvEnabled"
+                    :iconClass="ohifViewerIconTmtv" :level="computedResourceLevel" :linkUrl="ohifViewerUrlTmtv"
+                    :resourcesOrthancId="resourcesOrthancId" :title="$t('view_in_ohif_tmtv')"
+                    :tokenType="'viewer-instant-link'" :opensInNewTab="true">
+                </TokenLinkButton>
             </span>
-            <a v-if="this.resourceLevel == 'instance'" class="btn btn-sm btn-secondary m-1" type="button"
-                data-bs-toggle="tooltip" :title="`${$t('preview')}`" target="blank" v-bind:href="instancePreviewUrl">
-                <i class="bi bi-binoculars"></i>
-            </a>
+            <TokenLinkButton v-if="this.resourceLevel == 'instance'"
+                :iconClass="'bi bi-binoculars'" :level="this.resourceLevel" :linkUrl="instancePreviewUrl"
+                :resourcesOrthancId="[resourceOrthancId]" :title="$t('preview')"
+                :tokenType="'download-instant-link'" :opensInNewTab="true">
+            </TokenLinkButton>
+            <TokenLinkButton v-if="hasWsiButton"
+                :hidden="!isWsiButtonEnabled"
+                :iconClass="'fa-solid fa-microscope fa-button'" :level="this.resourceLevel" :linkUrl="wsiViewerUrl"
+                :resourcesOrthancId="resourcesOrthancId" :title="$t('view_in_wsi_viewer')"
+                :tokenType="'viewer-instant-link'" :opensInNewTab="true">
+            </TokenLinkButton>
         </div>
         <div class="btn-group" v-if="this.resourceLevel != 'bulk'">
             <TokenLinkButton v-if="uiOptions.EnableDownloadZip && this.resourceLevel != 'instance'"
@@ -460,6 +576,20 @@ export default {
                 </ul>
             </div>
         </div>
+        <div class="btn-group" v-if="this.resourceLevel == 'bulk'">
+            <!-- <button v-if="hasLabelsButton" class="btn btn-sm btn-secondary m-1" type="button"
+                data-bs-toggle="modal" v-bind:data-bs-target="'#labels2-modal2-' + this.componentId" :disabled="!isLabelsEnabled">
+                <i class="bi bi-tag" data-bs-toggle="tooltip" :title="$t('labels.edit_labels_button')" ></i>
+            </button> -->
+            <button v-if="hasLabelsButton" class="btn btn-sm btn-secondary m-1" type="button"
+                :disabled="!isLabelsEnabled" @click="showBulkLabelModal()">
+                <i class="bi bi-tag" data-bs-toggle="tooltip" :title="$t('labels.edit_labels_button')" ></i>
+            </button>
+            <BulkLabelsModal v-if="uiOptions.EnableEditLabels && isBulkLabelModalVisible" :id="'labels2-modal2-' + this.componentId" ref="bulk-label-modal"
+            :resourceLevel="this.resourceLevel" :resourcesOrthancId="selectedStudiesIds" @bulkModalClosed="onBulkModalClosed">
+
+            </BulkLabelsModal>
+        </div>
         <div class="btn-group">
             <div class="dropdown">
                 <button v-if="hasSendTo" class="dropdown btn btn-sm btn-secondary m-1 dropdown-toggle" type="button"
@@ -521,7 +651,7 @@ export default {
 
 <style>
 .bg-dropdown {
-    background-color: #4f8767;
+    background-color: var(--instance-odd-color);
 }
 
 .dropdown-submenu {
@@ -532,5 +662,9 @@ export default {
     top: 0;
     right: 100%;
     margin-top: -1px;
+}
+
+.fa-button {
+    line-height: 1.5;
 }
 </style>

@@ -58,20 +58,20 @@ export default {
 </template>
 
 <style>
-.instance-table > :not(:first-child) {
+.instance-table> :not(:first-child) {
     border-top: 0px !important;
-    color: #acdbcc;
+    color: var(--bs-body-color);
 }
 
-.instance-table > :first-child {
+.instance-table>:first-child {
     border-bottom: 2px !important;
     border-style: solid !important;
     border-color: black !important;
-    color: #89bdac;
+    color: var(--bs-body-color);
 }
 
-.instance-table > :nth-child(odd) > * {
-  background-color: var(--instance-selected-color);
+.instance-table>:nth-child(odd) {
+    background-color: var(--instance-odd-color);
 }
 
 .table > :not(caption) > * > * {

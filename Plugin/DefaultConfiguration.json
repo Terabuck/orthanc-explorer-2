@@ -31,6 +31,7 @@
             "EnableSettings": true,                     // Enables the settings menu/interface
             "EnableLinkToLegacyUi": true,               // Enables a link to the legacy Orthanc UI
             "EnableChangePassword": true,               // Enables the 'change password' button in the side bar.  Only applicable if Keycloak is enabled
+            "EnableEditLabels": true,                   // Enables labels management (create/delete/assign/unassign)
 
             "EnableShares": false,                      // Enables sharing studies.  See "Tokens" section below.
             "DefaultShareDuration": 0,                  // [in days].  0 means no expiration date, 
@@ -39,19 +40,21 @@
             // If both OHIF viewer configurations are enabled, only the v3 is taken into account
             "EnableOpenInOhifViewer": false,            // Enables a "open in OHIF viewer" button.  Note: OHIF can not be used together with KeyCloak (https://community.ohif.org/t/ohif-orthanc-token-to-access-a-single-study/727)
             "OhifViewerPublicRoot" : "http://to-be-defined/",  // must end with a '/'.  e.g: "http://ohif.my.site/" means that link to OHIF will look like http://ohif.my.site/Viewer/1.2.3.444.5555....
-            "EnableOpenInOhifViewer3": false,           // Enables a "open in OHIF viewer" button.  Note: OHIF can not be used together with KeyCloak (https://community.ohif.org/t/ohif-orthanc-token-to-access-a-single-study/727)
-            "OhifViewer3PublicRoot" : "http://to-be-defined/",  // must end with a '/'.  e.g: "http://ohif.my.site/" means that link to OHIF will look like http://ohif.my.site/viewer?StudyInstanceUIDs=1.2.3.444.5555....
+            "EnableOpenInOhifViewer3": false,           // Enables a "open in OHIF viewer" button.  If the OHIF plugin is loaded, the default value is 'true'
+            "OhifViewer3PublicRoot" : "/ohif/",         // must end with a '/'.  e.g: "http://ohif.my.site/" means that link to OHIF will look like http://ohif.my.site/viewer?StudyInstanceUIDs=1.2.3.444.5555....
 
             "EnableOpenInMedDreamViewer": false,        // Enables a "open in MedDream viewer" button
             "MedDreamViewerPublicRoot" : "http://to-be-defined/",  // must end with a '/'.  e.g: "http://meddream.my.site/Viewer/" means that link to MedDream will look like http://meddream.my.site/?study=1.2.3.444.5555....
 
             // Defines which icons is used by which enabled viewer.
-            // Allowed keys: "meddream", "osimis-web-viewer", "stone-webviewer", "ohif"
+            // Allowed keys: "meddream", "osimis-web-viewer", "stone-webviewer", "ohif", "ohif-vr", "ohif-tmtv"
             // Allowed values: CSS class that defines the viewer icons (only from bootstrap icons)
             "ViewersIcons" : {
                 "osimis-web-viewer": "bi bi-eye",
                 "stone-webviewer": "bi bi-eye-fill",
                 "ohif": "bi bi-grid",
+                "ohif-vr": "bi bi-grid-1x2",
+                "ohif-tmtv": "bi bi-grid-3x3-gap",
                 "meddream": "bi bi-columns-gap",
                 "volview": "bi bi-box"
             },
@@ -60,6 +63,8 @@
                 "osimis-web-viewer",
                 "stone-webviewer",
                 "ohif",
+                "ohif-vr",
+                "ohif-tmtv",
                 "meddream",
                 "volview"
             ],
@@ -147,13 +152,13 @@
 
             // The modalities to display in the Modalities filter dropdown in the Study List
             "ModalitiesFilter": [
-                "CR", "CT", "DR", "DX", "MG", "MR", "NM", "OT", "PT", "PX", "SEG", "SR", "US", "XA"
+                "CR", "CT", "DR", "DX", "KO", "MG", "MR", "NM", "OT", "PR", "PT", "PX", "RTDOSE", "RTSTRUCT", "RTPLAN", "SEG", "SR", "US", "XA", "XC"
             ],
 
             // Defines the list of languages available in the language picker
             // ex: "AvailableLanguages" : ["en", "fr"],
             // ex: "AvailableLanguages" : []  -> this won't show the language picker at all and force usage of the DefaultLanguage
-            "AvailableLanguages": ["en", "fr", "es", "it"],
+            "AvailableLanguages": ["en", "es", "fr", "it", "ka", "uk", "zh"],
             
             // Force the default language.  If null (default), the language is the language from the visitor's browser.
             // ex: "DefaultLanguage" : "en"

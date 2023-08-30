@@ -3,11 +3,6 @@
 This [Orthanc](https://www.orthanc-server.com) plugin implements a new 
 user interface for Orthanc to replace the Orthanc Explorer.
 
-Working demo is available at https://plasticosis.online/dark or https://plasticosis.online/dark/ui/app/index.html 
-(login: orthanc - password: orthanc)
-
-Datepicker is active now.
-
 ## Installation
 
 Binaries are available:

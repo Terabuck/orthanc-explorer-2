@@ -95,8 +95,7 @@ export default {
 }
 
 .upload-handler-drop-zone {
-    border-color: #93b58f;
-    border-style: dashed;
-    border-width: 2px;
+    color: var(--bs-body-color);
+    border-width: 1px;
 }
 </style>

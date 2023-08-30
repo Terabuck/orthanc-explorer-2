@@ -1,13 +1,16 @@
 :root {
     --nav-bar-width: 12rem;
 
+    --study-odd-color: #2d4229;
     --study-hover-color: #4e8144;
     --study-selected-color: #343837;
 
-    --series-hover-color:#4e8144;
-    --series-selected-color: #37463e;
+    --series-odd-color: #305c27;
+    --series-hover-color: #4e8144;
+    --series-selected-color:  #37463e;
     --series-expanded-color: #232d27;
 
+    --instance-odd-color: #316128;
     --instance-hover-color: #4e8144;
     --instance-selected-color: #212625;
 
@@ -18,7 +21,8 @@
     --nav-side-selected-bg-color: #191d1b;
     --nav-side-hover-bg-color: #28332d;
     --nav-side-submenu-color: #39a25c;
-
+    
+    --bs-body-color: #89bdac;
     --bs-body-bg: #1d1d1def;
     --bs-body-line-height: 1.0rem;
     --bs-body-font-size: 0.9rem;

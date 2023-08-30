@@ -133,17 +133,13 @@ export default {
             if (tagName == "seriesCount") {
                 return this.$i18n.t('series_count_header');
             } else if (tagName == "modalities") {
-                return translateDicomTag(this.$i18n.t, "ModalitiesInStudy");
+                return translateDicomTag(this.$i18n.t, this.$i18n.te, "ModalitiesInStudy");
             } else {
-                return translateDicomTag(this.$i18n.t, tagName);
+                return translateDicomTag(this.$i18n.t, this.$i18n.te, tagName);
             }
         },
         columnTooltip(tagName) {
-            if (tagName == "modalities") {
-                return translateDicomTag(this.$i18n.t, "ModalitiesInStudy");
-            } else {
-                return translateDicomTag(this.$i18n.t, tagName);
-            }
+            return this.columnTitle(tagName);
         },
         clearModalityFilter() {
             // console.log("StudyList: clearModalityFilter", this.updatingFilterUi);
@@ -524,10 +520,11 @@ export default {
         </div>
     </div>
 </template>
+
 <style>
 :root {
-  --filter-margin: 5px;
-  --filter-padding: 2px;
+    --filter-margin: 5px;
+    --filter-padding: 2px;
 }
 
 input.form-control.study-list-filter {
@@ -569,11 +566,13 @@ tr {
 }
 
 .filter-button {
-  /* border: 1px solid #ced4da; */
+    border-bottom-width: thin !important;
+    border: 1px solid var(--nav-side-color);
+    height: 2rem;
 }
 
 .search-button {
-  padding-left: 0px !important;
+    padding-left: 0px !important;
 }
 
 .is-not-searching {
@@ -582,36 +581,37 @@ tr {
 }
 
 .is-searching {
-  background-color: #fda90d86 !important;
-  border-color: #fda90d86 !important;
+    background-color: #fda90d86 !important;
+    border-color: #fda90d86 !important;
 }
 
 input.form-control.study-list-filter:not(:placeholder-shown) {
-  background-color: var(--nav-side-color);
+    background-color: white;
 }
 
 input.form-control.study-list-filter::placeholder {
-  color: rgb(200, 200, 200);
+    color: rgb(200, 200, 200);
 }
 
 button.form-control.study-list-filter {
-  color: #99d598;
-  margin-top: var(--filter-margin);
-  margin-bottom: var(--filter-margin);
-  padding-top: var(--filter-padding);
-  padding-bottom: var(--filter-padding);
+    color: var(--bs-body-color);
+    margin-top: var(--filter-margin);
+    margin-bottom: var(--filter-margin);
+    padding-top: var(--filter-padding);
+    padding-bottom: var(--filter-padding);
 }
 
 .study-table-header {
-  text-align: left;
-  padding-left: 4px;
-  color: #89bdac;
+    text-align: left;
+    padding-left: 10px;
+    color: var(--bs-body-color);
 }
 
-.study-table > :not(:first-child) {
-  border-top: 0px !important;
-  color: #89bdac;
+.study-table> :not(:first-child) {
+    border-top: 0px !important;
+    color: var(--bs-body-color);
 }
+
 
 .study-table > :nth-child(odd) > * {
   background-color: var(--bs-table-bg);
@@ -625,32 +625,32 @@ button.form-control.study-list-filter {
 }
 
 .study-filter th {
-  text-align: left;
-  padding-left: 4px;
-  background-color: #3e4a42;
-  padding-top: 0px;
-  padding-bottom: 0px;
+    text-align: left;
+    padding-left: 10px;
+    background-color: rgb(240, 240, 240);
+    padding-top: 0px;
+    padding-bottom: 0px;
 }
 
 .study-table td {
-  text-align: left;
-  padding-left: 4px;
+    text-align: left;
+    padding-left: 10px;
 }
 
 .bottom-fixed-alert {
-  position: fixed !important;
-  bottom: 0px;
-  width: 100%;
-  font-size: large;
-  font-weight: 600;
-  text-align: left;
-  padding-left: 50px !important;
+    position: fixed !important;
+    bottom: 0px;
+    width: 100%;
+    font-size: large;
+    font-weight: 600;
+    text-align: left;
+    padding-left: 50px !important;
 }
 
 .is-invalid-filter {
-  /* background-color: #f7dddf !important; */
-  border-color: red !important;
-  box-shadow: 0 0 0 0.25rem rgba(255, 0, 0, 0.25) !important;
+    /* background-color: #f7dddf !important; */
+    border-color: red !important;
+    box-shadow: 0 0 0 .25rem rgba(255, 0, 0, .25) !important;
 }
 
 .dropdown-menu {

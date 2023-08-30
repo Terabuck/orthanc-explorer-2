@@ -5,25 +5,36 @@ import { mapState, mapGetters } from "vuex"
 import ResourceButtonGroup from "./ResourceButtonGroup.vue";
 import ResourceDetailText from "./ResourceDetailText.vue";
 import api from "../orthancApi";
+import Tags from "bootstrap5-tags/tags.js"
 
 export default {
-    props: ['studyId', 'studyMainDicomTags', 'patientMainDicomTags'],
+    props: ['studyId', 'studyMainDicomTags', 'patientMainDicomTags', 'labels'],
+    emits: ["deletedStudy", "studyLabelsUpdated"],
     setup() {
     },
     data() {
         return {
             samePatientStudiesCount: 0,
-            hasLoadedSamePatientsStudiesCount: false
+            hasLoadedSamePatientsStudiesCount: false,
+            labelsModel: []
         };
+    },
+    async created() {
+        this.labelsModel = this.labels;
     },
     async mounted() {
         this.samePatientStudiesCount = (await api.getSamePatientStudies(this.patientMainDicomTags['PatientID'])).length;
         this.hasLoadedSamePatientsStudiesCount = true;
+        Tags.init();
     },
     computed: {
         ...mapState({
             uiOptions: state => state.configuration.uiOptions,
+            allLabels: state => state.labels.allLabels
         }),
+        selectedValues() {
+            return this.labelsModel.join(",");
+        }
         // studyMainTags() {
         //     return this.uiOptions.StudyMainTags;
         // }
@@ -32,6 +43,26 @@ export default {
     methods: {
         onDeletedStudy() {
             this.$emit("deletedStudy", this.studyId);
+        },
+        hasLabel(label) {
+            return this.labelsModel.includes(label);
+        }
+    },
+    watch: {
+        labelsModel: {
+            async handler(oldValue, newValue) {
+                // console.log(this.labelsModel);
+                let changed = await api.updateLabels({
+                    studyId: this.studyId,
+                    labels: this.labelsModel
+                });
+                if (changed) {
+                    this.$emit("studyLabelsUpdated", this.studyId);
+
+                    // TODO: make this works !  it currently crashes vue ... this.messageBus.emit('all-labels-changed', null);
+                }
+            },
+            deep: true
         }
     }
 
@@ -41,19 +72,38 @@ export default {
 
 <template>
     <table class="table table-responsive table-sm study-details-table">
+        <tr v-if="uiOptions.EnableEditLabels">
+            <td colspan="100%">
+                {{  $t('labels.study_details_title') }}
+                <select class="form-select" id="labelsEdit" name="tags[]" v-model="labelsModel" multiple
+                    data-allow-clear="true" data-show-all-suggestions="true" data-allow-new="true" data-badge-style="info"
+                    :placeholder="$t('labels.add_labels_placeholder')">
+                    <option v-for="label in allLabels" :key="label" :value="label" :selected="hasLabel(label)">{{ label }}
+                    </option>
+                </select>
+            </td>
+        </tr>
+        <tr v-if="!uiOptions.EnableEditLabels">
+            <td colspan="100%">
+                {{  $t('labels.study_details_title') }}
+                <span v-for="label in labelsModel" :key="label" class="label badge bg-info">{{ label }}</span>
+            </td>
+        </tr>
         <tr>
             <td width="40%" class="cut-text">
                 <ul>
-                    <ResourceDetailText v-for="tag in uiOptions.StudyMainTags" :key="tag" :tags="studyMainDicomTags" :tag="tag" :showIfEmpty="true"></ResourceDetailText>
+                    <ResourceDetailText v-for="tag in uiOptions.StudyMainTags" :key="tag" :tags="studyMainDicomTags"
+                        :tag="tag" :showIfEmpty="true"></ResourceDetailText>
                 </ul>
             </td>
             <td width="40%" class="cut-text">
                 <ul>
-                    <ResourceDetailText v-for="tag in uiOptions.PatientMainTags" :key="tag" :tags="patientMainDicomTags" :tag="tag" :showIfEmpty="true"></ResourceDetailText>
+                    <ResourceDetailText v-for="tag in uiOptions.PatientMainTags" :key="tag" :tags="patientMainDicomTags"
+                        :tag="tag" :showIfEmpty="true"></ResourceDetailText>
                 </ul>
                 <p v-if="hasLoadedSamePatientsStudiesCount && samePatientStudiesCount > 1">
                     {{ $t('this_patient_has_other_studies', { count: samePatientStudiesCount }) }}.
-                    <router-link v-bind:to="'/filtered-studies?PatientID=' + patientMainDicomTags['PatientID']">
+                    <router-link v-bind:to='"/filtered-studies?PatientID=\"" + patientMainDicomTags["PatientID"] + "\""' >
                         {{ $t('this_patient_has_other_studies_show') }}
                     </router-link>
                 </p>
@@ -70,7 +120,8 @@ export default {
         </tr>
         <tr>
             <td colspan="100">
-                <SeriesList :studyId="this.studyId" :studyMainDicomTags="this.studyMainDicomTags" :patientMainDicomTags="this.patientMainDicomTags" @deletedStudy="onDeletedStudy"></SeriesList>
+                <SeriesList :studyId="this.studyId" :studyMainDicomTags="this.studyMainDicomTags"
+                    :patientMainDicomTags="this.patientMainDicomTags" @deletedStudy="onDeletedStudy"></SeriesList>
             </td>
         </tr>
     </table>

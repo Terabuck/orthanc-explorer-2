@@ -24,14 +24,14 @@ export default {
             if (tagName == "instances_number") {
                 return "# " + this.$i18n.t('instances');
             } else {
-                return translateDicomTag(this.$i18n.t, tagName);
+                return translateDicomTag(this.$i18n.t, this.$i18n.te, tagName);
             }
         },
         columnTooltip(tagName) {
             if (tagName == "instances_number") {
                 return this.$i18n.t("instances_number");
             } else {
-                return translateDicomTag(this.$i18n.t, tagName);
+                return translateDicomTag(this.$i18n.t, this.$i18n.te, tagName);
             }
         },
         onDeletedSeries(seriesId) {
@@ -98,38 +98,31 @@ export default {
     </table>
 </template>
 
-
 <style>
-.series-table> :not(:first-child) {
+
+.series-table>:not(:first-child) {
     border-top: 0px !important;
-    color: #acdbcc;
+    color: var(--series-odd-color)
 }
 
-.series-table> :first-child {
+.series-table>:first-child {
     border-bottom: 2px !important;
     border-style: solid !important;
     border-color: black !important;
-    color: #89bdac;
 }
 
-.series-table> :nth-child(odd)>* {
-    background-color: var(--series-selected-color);
-}
-
-.table> :not(caption)>*>* {
-    padding: 0.35rem;
-    border-width: 1px 0px 1px 0px;
-    background-color: var(--bs-table-bg);
+.series-table>:nth-child(odd) {
+    background-color: var(--series-odd-color);
 }
 
 .series-table-header {
     text-align: left;
     padding-left: 10px;
-    padding-top: 6px;
 }
 
 .series-table td {
     text-align: left;
     padding-left: 10px;
 }
+
 </style>

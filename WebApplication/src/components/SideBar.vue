@@ -13,6 +13,7 @@ export default {
     data() {
         return {
             selectedModality: null,
+            selectedLabel: null,
             modalitiesEchoStatus: {}
         };
     },
@@ -24,7 +25,9 @@ export default {
             queryableDicomWebServers: state => state.configuration.queryableDicomWebServers,
             studiesIds: state => state.studies.studiesIds,
             statistics: state => state.studies.statistics,
+            labelsFilter: state => state.studies.labelsFilter,
             jobs: state => state.jobs.jobsIds,
+            allLabels: state => state.labels.allLabels
         }),
 
         hasQueryableDicomWebServers() {
@@ -62,6 +65,16 @@ export default {
         isEchoSuccess(modality) {
             return this.modalitiesEchoStatus[modality] == true;
         },
+        selectLabel(label) {
+            this.selectedLabel = label;
+            this.messageBus.emit('filter-label-changed', label);
+        },
+        isSelectedLabel(label) {
+            return this.labelsFilter.includes(label);
+        },
+        onAllLabelsChanged() {
+            this.$store.dispatch('labels/refresh');
+        },
         logout(event) {
             event.preventDefault();
             let logoutOptions = {
@@ -83,6 +96,9 @@ export default {
         }
 
     },
+    async created() {
+        // TODO: make this works (currently vue crashes) this.messageBus.on('all-labels-changed', this.onAllLabelsChanged);
+    },
     mounted() {
         this.$refs['modalities-collapsible'].addEventListener('show.bs.collapse', (e) => {
             for (const modality of this.queryableDicomModalities) {
@@ -103,7 +119,7 @@ export default {
 <template>
     <div class="nav-side-menu">
         <div>
-            <img class="orthanc-logo" src="..//assets/images/orthanc.png" height="32" />
+            <img class="orthanc-logo" src="..//assets/images/orthanc.png" height="48" />
         </div>
         <div v-if="uiOptions.ShowOrthancName" class="orthanc-name">
             <p>{{ system.Name }}</p>
@@ -117,6 +133,13 @@ export default {
                         }}</span>
                     </router-link>
                 </li>
+                <ul v-if="allLabels.length > 0" class="sub-menu" id="labels-list">
+                    <li v-for="label in allLabels" :key="label"
+                    v-bind:class="{ 'active': isSelectedLabel(label) }" @click="selectLabel(label)">
+                        <i class="fa fa-tag label-icon"></i>
+                        {{ label }}
+                    </li>
+                </ul>
 
                 <li v-if="uiOptions.EnableUpload" class="d-flex align-items-center" data-bs-toggle="collapse"
                     data-bs-target="#upload-handler">
@@ -198,20 +221,21 @@ export default {
                 </div>
             </ul>
         </div>
-        <div class="language-picker">
+        <div class="bottom-side-bar">
             <LanguagePicker />
         </div>
     </div>
 </template>
 <style scoped>
-
 .router-link {
     width: 100%;
     text-align: left;
 }
+
 .fix-router-link {
     margin-left: -20px !important;
 }
+
 .echo-status {
     font-size: 17px;
 }
@@ -233,20 +257,21 @@ export default {
 }
 
 .nav-side-menu {
-    font-family: verdana;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 1.5rem;
     font-weight: 500;
     background-color: var(--nav-side-bg-color);
     color: var(--nav-side-color);
+    height: 100%;
 }
 
 
 .nav-side-menu ul,
 .nav-side-menu li {
     list-style: none;
-    padding: 10px 0px;
+    padding: 0px;
     margin: 0px;
-    line-height: 25px;
+    line-height: 35px;
     cursor: pointer;
 }
 
@@ -259,13 +284,14 @@ export default {
     padding-left: 10px;
     padding-right: 10px;
     vertical-align: middle;
-    float: right;
+    float: none;
 }
 
 .nav-side-menu li .study-count {
     padding-right: 0px;
     float: right;
 }
+
 .nav-side-menu ul .active,
 .nav-side-menu li .active {
     border-left: 3px solid #d19b3d;
@@ -303,7 +329,7 @@ export default {
 .nav-side-menu li .sub-menu li:before {
     font-family: "Font Awesome\ 5 Free";
     font-weight: 900;
-    content: "\f105";
+    content: " ";
     display: inline-block;
     padding-left: 20px;
     padding-right: 20px;
@@ -336,6 +362,7 @@ export default {
 .nav-side-menu .menu-list .menu-content {
     display: block;
 }
+
 .nav-side-menu .menu-list .menu-content {
     display: block;
 }
@@ -343,7 +370,7 @@ export default {
 .menu-list {
     margin-left: 10px;
     margin-right: 10px;
-    font-size: 1rem;
+    font-size: 14px;
 }
 
 .menu-icon {
@@ -351,7 +378,13 @@ export default {
     margin-right: 10px;
 }
 
-.language-picker {
+.label-icon {
+    width: 15px;
+    margin-right: 5px;
+    line-height: 28px;
+}
+
+.bottom-side-bar {
     position: absolute;
     bottom: 1rem;
     width: 100%;

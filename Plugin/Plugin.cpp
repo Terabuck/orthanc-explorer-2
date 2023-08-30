@@ -40,7 +40,7 @@ std::string oe2BaseUrl_;
 
 Json::Value pluginsConfiguration_;
 bool hasUserProfile_ = false;
-
+bool openInOhifV3IsExplicitelyDisabled = false;
 bool enableShares_ = false;
 
 
@@ -175,13 +175,14 @@ void ReadConfiguration()
           jsonConfig["UiOptions"]["StudyListContentIfNoSearch"] = "empty";
         }
       }
+
+      openInOhifV3IsExplicitelyDisabled = jsonConfig["UiOptions"].isMember("EnableOpenInOhifViewer3") && jsonConfig["UiOptions"]["EnableOpenInOhifViewer3"].asBool() == false;
     }
 
     MergeJson(pluginJsonConfiguration_, jsonConfig);
   }
 
   enableShares_ = pluginJsonConfiguration_["UiOptions"]["EnableShares"].asBool(); // we are sure that the value exists since it is in the default configuration file
-
 }
 
 bool GetPluginConfiguration(Json::Value& jsonPluginConfiguration, const std::string& sectionName)
@@ -292,6 +293,19 @@ Json::Value GetPluginsConfiguration(bool& hasUserProfile)
     else if (pluginName == "connectivity-checks")
     {
       pluginsConfiguration[pluginName]["Enabled"] = true;
+    }
+    else if (pluginName == "ohif")
+    {
+      pluginsConfiguration[pluginName]["Enabled"] = true;
+      std::string ohifDataSource = "dicom-json";
+      if (GetPluginConfiguration(pluginConfiguration, "OHIF"))
+      {
+        if (pluginConfiguration.isMember("DataSource") && pluginConfiguration["DataSource"].asString() == "dicom-web")
+        {
+          ohifDataSource = "dicom-web";
+        }
+      }
+      pluginsConfiguration[pluginName]["DataSource"] = ohifDataSource;
     }
     else if (pluginName == "delayed-deletion")
     {
@@ -422,6 +436,12 @@ void GetOE2Configuration(OrthancPluginRestOutput* output,
     oe2Configuration["Plugins"] = pluginsConfiguration_;
     oe2Configuration["UiOptions"] = pluginJsonConfiguration_["UiOptions"];
     
+    // if OHIF has not been explicitely disabled in the config and if the plugin is loaded, enable it
+    if (!openInOhifV3IsExplicitelyDisabled && pluginsConfiguration_.isMember("ohif"))
+    {
+      oe2Configuration["UiOptions"]["EnableOpenInOhifViewer3"] = true;
+    }
+
     Json::Value tokens = pluginJsonConfiguration_["Tokens"];
     tokens["RequiredForLinks"] = hasUserProfile_;
 
@@ -454,6 +474,7 @@ void GetOE2Configuration(OrthancPluginRestOutput* output,
       UpdateUiOptions(uiOptions["EnableApiViewMenu"], permissions, "all|api-view");
       UpdateUiOptions(uiOptions["EnableSettings"], permissions, "all|settings");
       UpdateUiOptions(uiOptions["EnableShares"], permissions, "all|share");
+      UpdateUiOptions(uiOptions["EnableEditLabels"], permissions, "all|edit-labels");
 
       // the Legacy UI is not available with user profile since it would not refresh the tokens
       uiOptions["EnableLinkToLegacyUi"] = false;

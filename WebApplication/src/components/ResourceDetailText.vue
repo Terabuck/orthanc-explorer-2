@@ -19,7 +19,7 @@ export default {
     },
     computed: {
         title() {
-            return translateDicomTag(this.$i18n.t, this.tag);
+            return translateDicomTag(this.$i18n.t, this.$i18n.te, this.tag);
         },
         value() {
             if (this.hasValue) {
@@ -50,12 +50,11 @@ export default {
 
 </template>
 
-
 <style>
 .details-label {
     font-weight: 700;
     max-width: 30%;
-    color: #89bdac;
+    color: var(--bs-body-color);
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -64,7 +63,7 @@ export default {
     margin-left: auto !important;
     font-weight: 500;
     max-width: 25vw;
-    color: #89bdac;
+    color: var(--bs-body-color);
     overflow: hidden;
     text-overflow: ellipsis;
 }

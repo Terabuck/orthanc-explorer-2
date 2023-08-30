@@ -1,6 +1,52 @@
+1.1.0 (2023-08-16)
+==================
+
+Fixes:
+- fixed an XSS vulnerability (many thanks to Abebe Hailu from kth.se)
+
+1.0.3 (2023-07-14)
+==================
+
+Changes:
+- added support for opening the WSI viewer on series
+
+1.0.2 (2023-06-27)
+=================
+
+Fixes:
+- fix ModalitiesInStudy filtering
+- fix links to uploaded studies
+
+
+1.0.1 (2023-06-21)
+=================
+
+Changes:
+- added support for OHIF plugin:
+  - new default value for the 'OhifViewer3PublicRoot' configuration: '/ohif/'
+  - now displaying 3 buttons to open OHIF in basic mode, Volume Rendering and TMTV modes
+  - 2 more viewers can be listed in 'ViewersIcons' and in 'ViewersOrdering': "ohif-vr" & "ohif-tmtv"
+- added support for labels
+  - new 'UiOptions.EnableEditLabels' configuration
+- added support for VolView 1.1 plugin
+- 'StudyListColumns' can now contain any DICOM Tag that is stored as a MainDicomTag or ExtraMainDicomTag
+- added Ukrainian and Chinese translations thanks to Stephen D. Scotti, 'Franklin' and Juriy Cherednichock
+
+Fixes:
+- use auth token for /preview if required
+
+
+0.9.3 (2023-05-15)
+==================
+
 Changes:
 - allow opening MedDream viewer on multiple studies
 - new italian translations thanks to Stefano Feroldi
+- new georgian translations thanks to Yomarbuzz
+
+Fixes:
+- improved integration with OHIF v3 and keycloak
+
 
 0.9.2 (2023-04-17)
 ==================
